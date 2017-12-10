@@ -1,0 +1,14 @@
+group 'victorynox'
+version '0.0.1'
+
+apply plugin: 'java'
+
+sourceCompatibility = 9
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
