@@ -13,5 +13,5 @@ public interface SubParserInterface<T> {
 	 * @throws SyntaxErrorException
 	 * @return T type if parse return.
 	 */
-	T parse(TokenStream tokenStream) throws SyntaxErrorException;
+	T parse(TokenStreamIterator tokenStream) throws SyntaxErrorException;
 }

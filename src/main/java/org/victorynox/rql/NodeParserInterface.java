@@ -10,5 +10,5 @@ public interface NodeParserInterface extends SubParserInterface<AbstractNode> {
 	 * Check token stream to support.
 	 * @return true if Parser support this tokens
 	 */
-	boolean supports(TokenStream tokenStream);
+	boolean supports(TokenStreamIterator tokenStream);
 }

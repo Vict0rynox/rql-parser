@@ -41,10 +41,8 @@ public class NodeParserChain implements NodeParserInterface{
 		nodeParsers.add(nodeParser);
 	}
 
-	//TODO: TokenStream is not TokenStreamInsterface. Need rework this functional.
-
 	@Override
-	public boolean supports(TokenStream tokenStream) {
+	public boolean supports(TokenStreamIterator tokenStream) {
 		for (NodeParserInterface nodeParser: nodeParsers) {
 			if(nodeParser.supports(tokenStream)) {
 				return true;
@@ -54,7 +52,7 @@ public class NodeParserChain implements NodeParserInterface{
 	}
 
 	@Override
-	public AbstractNode parse(TokenStream tokenStream) throws SyntaxErrorException {
+	public AbstractNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
 		for (NodeParserInterface nodeParser: nodeParsers) {
 			if(nodeParser.supports(tokenStream)) {
 				return nodeParser.parse(tokenStream);
