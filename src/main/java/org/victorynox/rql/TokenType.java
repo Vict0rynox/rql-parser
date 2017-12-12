@@ -10,14 +10,14 @@ public enum TokenType {
 	T_END(-1),
 
 	T_INTEGER(1),
-	T_FLOAT(2),
+	T_FLOAT(2), //TODO: maybe need renamed to T_DOUBLE
 	T_STRING(3),
 	T_DATE(4),
 	T_GLOB(5),
 
 	T_CLOSE_PARENTHESIS(11),
 	T_OPEN_PARENTHESIS(12),
-	T_COME(13),
+	T_COMMA(13),
 	T_AMPERSAND(14),
 	T_VERTICAL_BAR(15),
 	T_PLUS(16),
