@@ -13,7 +13,7 @@ import java.util.List;
 public class AndNode extends AbstractLogicalNode {
 
 	/**
-	 * Default AndNode constructor
+	 * Default AndNodeParser constructor
 	 */
 	public AndNode() {
 		super();

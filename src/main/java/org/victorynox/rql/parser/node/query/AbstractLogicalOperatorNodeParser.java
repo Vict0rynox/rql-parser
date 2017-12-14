@@ -4,6 +4,7 @@ import org.victorynox.rql.*;
 import org.victorynox.rql.exception.SyntaxErrorException;
 import org.victorynox.rql.node.AbstractQueryNode;
 import org.victorynox.rql.node.operator.AbstractComparisonNode;
+import org.victorynox.rql.node.operator.AbstractLogicalNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public abstract class AbstractLogicalOperatorNodeParser implements NodeParserInt
 	 * @param queryList list with query
 	 * @return Node
 	 */
-	abstract protected AbstractComparisonNode createNode(List<AbstractQueryNode> queryList);
+	abstract protected AbstractQueryNode createNode(List<AbstractQueryNode> queryList) throws SyntaxErrorException;
 
 	/**
 	 *
