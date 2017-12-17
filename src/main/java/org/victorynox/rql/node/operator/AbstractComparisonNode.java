@@ -7,7 +7,7 @@ import org.victorynox.rql.node.AbstractQueryNode;
  * @author victorynox
  * @version 0.1
  */
-public abstract class AbstractComparisonNode extends AbstractQueryNode {
+public abstract class AbstractComparisonNode<T> extends AbstractQueryNode {
 
 	/**
 	 * Filed name

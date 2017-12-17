@@ -2,7 +2,6 @@ package org.victorynox.rql.caster;
 
 import org.victorynox.rql.Token;
 import org.victorynox.rql.TokenType;
-import org.victorynox.rql.TypeCasterInsterface;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,7 +13,7 @@ import java.util.Date;
  * @author victorynox
  * @version 0.1
  */
-public class IntegerTypeCaster implements TypeCasterInsterface<Integer> {
+public class IntegerTypeCaster implements TypeCaster<Integer> {
 	@Override
 	public Integer typeCast(Token token) {
 		if(token.test(new TokenType[]{TokenType.T_NULL})) {

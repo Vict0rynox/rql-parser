@@ -1,7 +1,5 @@
 package org.victorynox.rql.node;
 
-import org.victorynox.rql.AbstractNode;
-
 /**
  * Abstraction class for QueryNode
  * @author victorynox

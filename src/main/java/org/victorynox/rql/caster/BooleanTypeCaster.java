@@ -2,14 +2,13 @@ package org.victorynox.rql.caster;
 
 import org.victorynox.rql.Token;
 import org.victorynox.rql.TokenType;
-import org.victorynox.rql.TypeCasterInsterface;
 
 /**
  * Cast token value to Boolean type
  * @author victorynox
  * @version 0.1
  */
-public class BooleanTypeCaster implements TypeCasterInsterface<Boolean>{
+public class BooleanTypeCaster implements TypeCaster<Boolean> {
 	@Override
 	public Boolean typeCast(Token token) {
 		if(token.test(new TokenType[]{TokenType.T_NULL})) {

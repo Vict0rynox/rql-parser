@@ -105,4 +105,9 @@ public class TokenStreamIterator implements Iterator<Token>{
 	{
 		return tokenStream.tokens.get(current).getType() == TokenType.T_END;
 	}
+
+	@Override
+	public TokenStreamIterator clone() throws CloneNotSupportedException {
+		return (TokenStreamIterator)super.clone();
+	}
 }

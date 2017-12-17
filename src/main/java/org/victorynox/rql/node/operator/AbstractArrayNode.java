@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @param <T> node values type
  */
-public abstract class AbstractArrayNode<T> extends AbstractComparisonNode {
+public abstract class AbstractArrayNode<T> extends AbstractComparisonNode<T> {
 
 	/**
 	 * Array values list with type T

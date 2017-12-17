@@ -2,7 +2,9 @@ package org.victorynox.rql.parser.node;
 
 import org.victorynox.rql.*;
 import org.victorynox.rql.exception.SyntaxErrorException;
+import org.victorynox.rql.node.AbstractNode;
 import org.victorynox.rql.node.SelectNode;
+import org.victorynox.rql.parser.TokenStreamParser;
 
 import java.util.ArrayList;
 
@@ -12,20 +14,20 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public class SelectNodeParser implements NodeParserInterface{
+public class SelectNodeParser implements NodeParser {
 
 	/**
 	 * field name parser with string type.
 	 */
-	protected SubParserInterface<String> fieldNmaeParser;
+	protected TokenStreamParser<String> fieldNameParser;
 
 	/**
 	 * Init with string parser
 	 * @param fieldNameParser string parser
 	 */
-	public SelectNodeParser(SubParserInterface<String> fieldNameParser)
+	public SelectNodeParser(TokenStreamParser<String> fieldNameParser)
 	{
-		this.fieldNmaeParser = fieldNmaeParser;
+		this.fieldNameParser = fieldNameParser;
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class SelectNodeParser implements NodeParserInterface{
 		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS});
 
 		do {
-			filedNameList.add(fieldNmaeParser.parse(tokenStream));
+			filedNameList.add(fieldNameParser.parse(tokenStream));
 			if(!tokenStream.getCurrent().test(new TokenType[]{T_COMMA})) {
 				break;
 			}

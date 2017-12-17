@@ -1,7 +1,7 @@
 package org.victorynox.rql.parser.value;
 
 import org.victorynox.rql.Glob;
-import org.victorynox.rql.SubParserInterface;
+import org.victorynox.rql.parser.TokenStreamParser;
 import org.victorynox.rql.TokenStreamIterator;
 import org.victorynox.rql.TokenType;
 import org.victorynox.rql.exception.SyntaxErrorException;
@@ -11,7 +11,7 @@ import org.victorynox.rql.exception.SyntaxErrorException;
  * @author victorynox
  * @version 0.1
  */
-public class GlobParser implements SubParserInterface<Glob> {
+public class GlobParser implements TokenStreamParser<Glob> {
 
 	protected static TokenType[] allowedType = new TokenType[]{
 			TokenType.T_INTEGER,

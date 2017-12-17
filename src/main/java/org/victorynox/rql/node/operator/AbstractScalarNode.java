@@ -6,7 +6,7 @@ package org.victorynox.rql.node.operator;
  * @version 0.1
  * @param <T> node value type
  */
-public abstract class AbstractScalarNode<T> extends AbstractComparisonNode {
+public abstract class AbstractScalarNode<T> extends AbstractComparisonNode<T> {
 
 	/**
 	 * Node value

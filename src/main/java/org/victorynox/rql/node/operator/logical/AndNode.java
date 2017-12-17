@@ -22,7 +22,7 @@ public class AndNode extends AbstractLogicalNode {
 	/**
 	 * @param queries <code>List</code> of query node
 	 */
-	public AndNode(List<AbstractQueryNode> queries) {
+	public AndNode(List<? extends AbstractQueryNode> queries) {
 		super(queries);
 	}
 

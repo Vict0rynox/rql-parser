@@ -2,7 +2,6 @@ package org.victorynox.rql.caster;
 
 import org.victorynox.rql.Token;
 import org.victorynox.rql.TokenType;
-import org.victorynox.rql.TypeCasterInsterface;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -12,7 +11,7 @@ import java.net.URLEncoder;
  * @author victorynox
  * @version 0.1
  */
-public class StringTypeCaster implements TypeCasterInsterface<String> {
+public class StringTypeCaster implements TypeCaster<String> {
 	@Override
 	public String typeCast(Token token) {
 		if(token.test(new TokenType[]{TokenType.T_NULL})) {

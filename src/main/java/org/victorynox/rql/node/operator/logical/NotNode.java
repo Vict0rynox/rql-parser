@@ -23,7 +23,7 @@ public class NotNode extends AbstractLogicalNode {
 	 *
 	 * @param queries <code>List</code> of query node
 	 */
-	public NotNode(List<AbstractQueryNode> queries) {
+	public NotNode(List<? extends AbstractQueryNode> queries) {
 		super(queries);
 	}
 

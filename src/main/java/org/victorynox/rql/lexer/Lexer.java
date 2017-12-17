@@ -1,10 +1,13 @@
-package org.victorynox.rql;
+package org.victorynox.rql.lexer;
+
+import org.victorynox.rql.ParserException;
+import org.victorynox.rql.Token;
 
 /**
  * @author victorynox
  * @version 0.1
  */
-public interface SubLexerInterface {
+public interface Lexer {
 
 	/**
 	 * Get token at position in string.

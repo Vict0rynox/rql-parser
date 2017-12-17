@@ -2,8 +2,10 @@ package org.victorynox.rql.parser.node;
 
 import org.victorynox.rql.*;
 import org.victorynox.rql.exception.SyntaxErrorException;
+import org.victorynox.rql.node.AbstractNode;
 import org.victorynox.rql.node.SortNode;
 import org.victorynox.rql.node.SortType;
+import org.victorynox.rql.parser.TokenStreamParser;
 
 import java.util.HashMap;
 
@@ -14,18 +16,18 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public class SortNodeParser implements NodeParserInterface {
+public class SortNodeParser implements NodeParser {
 
 	/**
 	 * fieldNameParser
 	 */
-	protected SubParserInterface<String> fieldNameParser;
+	protected TokenStreamParser<String> fieldNameParser;
 
 	/**
 	 * Init with string parser
 	 * @param fieldNameParser string parser
 	 */
-	public SortNodeParser(SubParserInterface<String> fieldNameParser)
+	public SortNodeParser(TokenStreamParser<String> fieldNameParser)
 	{
 		this.fieldNameParser = fieldNameParser;
 	}

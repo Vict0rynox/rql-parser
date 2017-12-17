@@ -1,10 +1,12 @@
-package org.victorynox.rql;
+package org.victorynox.rql.caster;
+
+import org.victorynox.rql.Token;
 
 /**
  * @author victorynox
  * @version 0.1
  */
-public interface TypeCasterInsterface<T> {
+public interface TypeCaster<T> {
 
 	/**
 	 * Casted token value to same type

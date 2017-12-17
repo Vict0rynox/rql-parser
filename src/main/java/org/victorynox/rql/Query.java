@@ -1,9 +1,6 @@
 package org.victorynox.rql;
 
-import org.victorynox.rql.node.AbstractQueryNode;
-import org.victorynox.rql.node.LimitNode;
-import org.victorynox.rql.node.SelectNode;
-import org.victorynox.rql.node.SortNode;
+import org.victorynox.rql.node.*;
 
 /**
  * @author victorynox

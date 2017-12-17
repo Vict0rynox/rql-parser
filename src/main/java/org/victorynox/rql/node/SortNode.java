@@ -1,6 +1,5 @@
 package org.victorynox.rql.node;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +8,7 @@ import java.util.Map;
  * @author vicotrynox
  * @version  0.1
  */
-public class SortNode extends AbstractQueryNode {
+public class SortNode extends AbstractNode {
 
 	/**
 	 * Staged map of filed name and sort type.

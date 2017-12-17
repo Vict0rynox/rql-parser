@@ -2,7 +2,9 @@ package org.victorynox.rql.parser.node;
 
 import org.victorynox.rql.*;
 import org.victorynox.rql.exception.SyntaxErrorException;
+import org.victorynox.rql.node.AbstractNode;
 import org.victorynox.rql.node.LimitNode;
+import org.victorynox.rql.parser.TokenStreamParser;
 
 import static org.victorynox.rql.TokenType.*;
 
@@ -12,19 +14,19 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public class LimitNodeParser implements NodeParserInterface {
+public class LimitNodeParser implements NodeParser {
 
 	/**
 	 * int ValueParser
 	 */
-	protected SubParserInterface<Integer> valueParser;
+	protected TokenStreamParser<Integer> valueParser;
 
 	/**
 	 * Init with ValueParser
 	 *
 	 * @param valueParser parser limit node value
 	 */
-	public LimitNodeParser(SubParserInterface<Integer> valueParser) {
+	public LimitNodeParser(TokenStreamParser<Integer> valueParser) {
 		this.valueParser = valueParser;
 	}
 
@@ -38,12 +40,11 @@ public class LimitNodeParser implements NodeParserInterface {
 
 	@Override
 	public AbstractNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
-		int limit = 0;
-		int offset = 0;
 		tokenStream.expect(new TokenType[]{T_OPERATOR}, new String[]{"limit"});
 		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS});
 
-		limit = valueParser.parse(tokenStream);
+		int limit = valueParser.parse(tokenStream);
+		int offset = 0;
 		if(tokenStream.getCurrent().test(new TokenType[]{T_COMMA})) {
 			offset = valueParser.parse(tokenStream);
 		}

@@ -1,10 +1,7 @@
 package org.victorynox.rql.parser.node.query;
 
-import org.victorynox.rql.AbstractNode;
-import org.victorynox.rql.NodeParserInterface;
-import org.victorynox.rql.SubParserInterface;
-import org.victorynox.rql.TokenStreamIterator;
-import org.victorynox.rql.exception.SyntaxErrorException;
+import org.victorynox.rql.parser.node.NodeParser;
+import org.victorynox.rql.parser.TokenStreamParser;
 import org.victorynox.rql.node.operator.AbstractComparisonNode;
 
 /**
@@ -12,17 +9,17 @@ import org.victorynox.rql.node.operator.AbstractComparisonNode;
  * @author victorynox
  * @version 0.1
  */
-public abstract class AbstractComparsionOperatorNodeParser implements NodeParserInterface {
+public abstract class AbstractComparisonNodeParser<T extends AbstractComparisonNode, V> implements NodeParser<T> {
 
 	/**
 	 * Filed name parser
 	 */
-	protected SubParserInterface<String> filedNameParser;
+	protected TokenStreamParser<String> filedNameParser;
 
 	/**
 	 * Value parser
 	 */
-	protected SubParserInterface valueParser;
+	protected TokenStreamParser<V> valueParser;
 
 	/**
 	 * Default constructor
@@ -30,7 +27,7 @@ public abstract class AbstractComparsionOperatorNodeParser implements NodeParser
 	 * @param filedNameParser - parser for field name
 	 * @param valueParser     - parser for value
 	 */
-	public AbstractComparsionOperatorNodeParser(SubParserInterface<String> filedNameParser, SubParserInterface valueParser) {
+	public AbstractComparisonNodeParser(TokenStreamParser<String> filedNameParser, TokenStreamParser<V> valueParser) {
 		this.filedNameParser = filedNameParser;
 		this.valueParser = valueParser;
 	}
@@ -39,10 +36,9 @@ public abstract class AbstractComparsionOperatorNodeParser implements NodeParser
 	 * Create node with data
 	 * @param filed node filed name
 	 * @param value node value
-	 * @param <T> value type
 	 * @return Node
 	 */
-	abstract protected <T>AbstractComparisonNode createNode(String filed, T value);
+	abstract protected T createNode(String filed, V value);
 
 	/**
 	 *

@@ -1,17 +1,17 @@
-package org.victorynox.rql.parser.node.query.comparsion;
+package org.victorynox.rql.parser.node.query.comparison;
 
-import org.victorynox.rql.AbstractNode;
-import org.victorynox.rql.SubParserInterface;
+import org.victorynox.rql.parser.TokenStreamParser;
 import org.victorynox.rql.TokenStreamIterator;
 import org.victorynox.rql.TokenType;
 import org.victorynox.rql.exception.SyntaxErrorException;
-import org.victorynox.rql.parser.node.query.AbstractComparsionOperatorNodeParser;
+import org.victorynox.rql.node.operator.AbstractComparisonNode;
+import org.victorynox.rql.parser.node.query.AbstractComparisonNodeParser;
 
 /**
  * @author victorynox
  * @version 0.1
  */
-public abstract class AbstractRqlNodeParser extends AbstractComparsionOperatorNodeParser {
+public abstract class AbstractRqlNodeParser<T extends AbstractComparisonNode<V>, V> extends AbstractComparisonNodeParser<T, V> {
 
 	/**
 	 * Default constructor
@@ -19,7 +19,7 @@ public abstract class AbstractRqlNodeParser extends AbstractComparsionOperatorNo
 	 * @param filedNameParser - parser for field name
 	 * @param valueParser     - parser for value
 	 */
-	public AbstractRqlNodeParser(SubParserInterface<String> filedNameParser, SubParserInterface valueParser) {
+	public AbstractRqlNodeParser(TokenStreamParser<String> filedNameParser, TokenStreamParser<V> valueParser) {
 		super(filedNameParser, valueParser);
 	}
 
@@ -32,14 +32,14 @@ public abstract class AbstractRqlNodeParser extends AbstractComparsionOperatorNo
 	}
 
 	@Override
-	public AbstractNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
+	public T parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
 
 		tokenStream.expect(new TokenType[]{TokenType.T_OPERATOR}, new String[]{getOperatorName()});
 		tokenStream.expect(new TokenType[]{TokenType.T_OPEN_PARENTHESIS});
 
 		String filed = filedNameParser.parse(tokenStream);
 		tokenStream.expect(new TokenType[]{TokenType.T_COMMA});
-		Object value = valueParser.parse(tokenStream);
+		V value = valueParser.parse(tokenStream);
 
 		tokenStream.expect(new TokenType[]{TokenType.T_CLOSE_PARENTHESIS});
 

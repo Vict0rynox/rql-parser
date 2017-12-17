@@ -3,8 +3,9 @@ package org.victorynox.rql.parser.node.query;
 import org.victorynox.rql.*;
 import org.victorynox.rql.exception.SyntaxErrorException;
 import org.victorynox.rql.node.AbstractQueryNode;
-import org.victorynox.rql.node.operator.AbstractComparisonNode;
 import org.victorynox.rql.node.operator.AbstractLogicalNode;
+import org.victorynox.rql.parser.TokenStreamParser;
+import org.victorynox.rql.parser.node.NodeParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,18 +17,18 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public abstract class AbstractLogicalOperatorNodeParser implements NodeParserInterface {
+public abstract class AbstractLogicalNodeParser<T extends  AbstractLogicalNode> implements NodeParser<T> {
 
 	/**
 	 * Parser another <code>AbstractQueryNode</code>
 	 */
-	protected SubParserInterface<AbstractQueryNode> conditionParser;
+	protected TokenStreamParser<T> conditionParser;
 
 	/**
 	 * Default config
 	 * @param conditionParser condition parser
 	 */
-	public AbstractLogicalOperatorNodeParser(SubParserInterface<AbstractQueryNode> conditionParser)
+	public AbstractLogicalNodeParser(TokenStreamParser<T> conditionParser)
 	{
 		this.conditionParser = conditionParser;
 	}
@@ -37,7 +38,7 @@ public abstract class AbstractLogicalOperatorNodeParser implements NodeParserInt
 	 * @param queryList list with query
 	 * @return Node
 	 */
-	abstract protected AbstractQueryNode createNode(List<AbstractQueryNode> queryList) throws SyntaxErrorException;
+	abstract protected T createNode(List<? extends AbstractQueryNode> queryList) throws SyntaxErrorException;
 
 	/**
 	 *
@@ -54,8 +55,8 @@ public abstract class AbstractLogicalOperatorNodeParser implements NodeParserInt
 	}
 
 	@Override
-	public AbstractNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
-		List<AbstractQueryNode> queryList = new ArrayList<>();
+	public T parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
+		List<AbstractLogicalNode> queryList = new ArrayList<>();
 
 		tokenStream.expect(new TokenType[]{T_OPERATOR}, new String[]{getOperatorName()});
 		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS});

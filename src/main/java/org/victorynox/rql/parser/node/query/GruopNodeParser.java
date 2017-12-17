@@ -5,6 +5,8 @@ import org.victorynox.rql.exception.SyntaxErrorException;
 import org.victorynox.rql.node.AbstractQueryNode;
 import org.victorynox.rql.node.operator.logical.AndNode;
 import org.victorynox.rql.node.operator.logical.OrNode;
+import org.victorynox.rql.parser.TokenStreamParser;
+import org.victorynox.rql.parser.node.NodeParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +19,17 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public class GruopNodeParser implements NodeParserInterface {
+public class GruopNodeParser implements NodeParser {
 
 	/**
 	 * Parser another <code>AbstractQueryNode</code>
 	 */
-	protected SubParserInterface<AbstractQueryNode> conditionParser;
+	protected TokenStreamParser<AbstractQueryNode> conditionParser;
 
 	/**
 	 * @param conditionParser condition query parser
 	 */
-	public GruopNodeParser(SubParserInterface<AbstractQueryNode> conditionParser) {
+	public GruopNodeParser(TokenStreamParser<AbstractQueryNode> conditionParser) {
 		this.conditionParser = conditionParser;
 	}
 
@@ -37,7 +39,7 @@ public class GruopNodeParser implements NodeParserInterface {
 	}
 
 	@Override
-	public AbstractNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
+	public AbstractQueryNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
 		List<AbstractQueryNode> queryList = new ArrayList<>();
 		TokenType operator = null;
 

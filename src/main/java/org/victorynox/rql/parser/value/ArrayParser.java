@@ -1,6 +1,6 @@
 package org.victorynox.rql.parser.value;
 
-import org.victorynox.rql.SubParserInterface;
+import org.victorynox.rql.parser.TokenStreamParser;
 import org.victorynox.rql.TokenStreamIterator;
 import org.victorynox.rql.TokenType;
 import org.victorynox.rql.exception.SyntaxErrorException;
@@ -14,19 +14,19 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class ArrayParser<T> implements SubParserInterface<List<T>> {
+public class ArrayParser<T> implements TokenStreamParser<List<T>> {
 
 	/**
 	 * SubParser
 	 */
-	protected SubParserInterface<T> itemParser;
+	protected TokenStreamParser<T> itemParser;
 
 	/**
 	 * Init Array parser with itemParser
 	 *
 	 * @param itemParser parser for parse array item value.
 	 */
-	public ArrayParser(SubParserInterface<T> itemParser) {
+	public ArrayParser(TokenStreamParser<T> itemParser) {
 		this.itemParser = itemParser;
 	}
 

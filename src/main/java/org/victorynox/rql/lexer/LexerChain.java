@@ -1,4 +1,8 @@
-package org.victorynox.rql;
+package org.victorynox.rql.lexer;
+
+import org.victorynox.rql.ParserException;
+import org.victorynox.rql.Token;
+import org.victorynox.rql.lexer.Lexer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,17 +12,17 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class SubLexerChain implements SubLexerInterface{
+public class LexerChain implements Lexer {
 
 	/**
 	 * subLexerList
 	 */
-	protected List<SubLexerInterface> subLexerList;
+	protected List<Lexer> subLexerList;
 
 	/**
 	 * Init chain with empty list
 	 */
-	public SubLexerChain()
+	public LexerChain()
 	{
 		subLexerList = new ArrayList<>();
 	}
@@ -27,18 +31,18 @@ public class SubLexerChain implements SubLexerInterface{
 	 * Add SubLexer to chan
 	 * @param subLexer - additional sub lexer 
 	 */
-	public void addSubLexer(SubLexerInterface subLexer)
+	public void addSubLexer(Lexer subLexer)
 	{
 		subLexerList.add(subLexer);
 	}
 
 	@Override
 	public Token getTokenAt(String code, int cursor) throws ParserException {
-		for (SubLexerInterface subLexer : subLexerList) {
+		for (Lexer subLexer : subLexerList) {
 			try {
 				return subLexer.getTokenAt(code, cursor);
 			} catch (ParserException ignored) {
-				//TODO: rewrite this with optional or add method hasTokenAt() to <code>SubLexerInterface</code>
+				//TODO: rewrite this with optional or add method hasTokenAt() to <code>Lexer</code>
 			}
 		}
 		throw new ParserException();

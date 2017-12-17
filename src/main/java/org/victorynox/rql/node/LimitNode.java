@@ -5,7 +5,7 @@ package org.victorynox.rql.node;
  * @author victorynox
  * @version 0.1
  */
-public class LimitNode extends AbstractQueryNode {
+public class LimitNode extends AbstractNode {
 
 	/**
 	 * staged a number of element limit in query result

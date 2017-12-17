@@ -1,6 +1,7 @@
 package org.victorynox.rql;
 
 import org.victorynox.rql.exception.SyntaxErrorException;
+import org.victorynox.rql.lexer.Lexer;
 
 import java.util.ArrayList;
 
@@ -8,18 +9,18 @@ import java.util.ArrayList;
  * @author victorynox
  * @version 0.1
  */
-public class Lexer {
+public class Tokenizer {
 
 	/**
 	 * SubLexer
 	 */
-	protected SubLexerInterface subLexer;
+	protected Lexer subLexer;
 
 	/**
-	 * Init Lexer with subLexer
+	 * Init Tokenizer with subLexer
 	 * @param subLexer injected sub lexer
 	 */
-	public Lexer(SubLexerInterface subLexer)
+	public Tokenizer(Lexer subLexer)
 	{
 		this.subLexer = subLexer;
 	}
@@ -28,7 +29,7 @@ public class Lexer {
 	 * Default getter
 	 * @return subLexer
 	 */
-	public SubLexerInterface getSubLexer() {
+	public Lexer getSubLexer() {
 		return subLexer;
 	}
 
@@ -36,7 +37,7 @@ public class Lexer {
 	 * Default setter
 	 * @param subLexer another subLexer
 	 */
-	public void setSubLexer(SubLexerInterface subLexer) {
+	public void setSubLexer(Lexer subLexer) {
 		this.subLexer = subLexer;
 	}
 
