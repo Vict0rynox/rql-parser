@@ -45,4 +45,5 @@ public abstract class AbstractRqlNodeParser<T extends AbstractComparisonNode<V>,
 
 		return createNode(filed, value);
 	}
+
 }

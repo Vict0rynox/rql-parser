@@ -12,14 +12,14 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class OrNodeParser extends AbstractLogicalNodeParser<OrNode> {
+public class OrNodeParser<V extends AbstractQueryNode> extends AbstractLogicalNodeParser<OrNode, V> {
 
 	/**
 	 * Default config
 	 *
 	 * @param conditionParser condition parser
 	 */
-	public OrNodeParser(TokenStreamParser<OrNode> conditionParser) {
+	public OrNodeParser(TokenStreamParser<V> conditionParser) {
 		super(conditionParser);
 	}
 

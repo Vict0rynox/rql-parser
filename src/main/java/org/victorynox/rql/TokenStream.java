@@ -26,7 +26,7 @@ public class TokenStream implements Iterable<Token> {
 	}
 
 	@Override
-	public Iterator<Token> iterator() {
+	public TokenStreamIterator iterator() {
 		return new TokenStreamIterator(this);
 	}
 }

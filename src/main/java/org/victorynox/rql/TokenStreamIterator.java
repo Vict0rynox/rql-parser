@@ -30,7 +30,7 @@ public class TokenStreamIterator implements Iterator<Token>{
 
 	@Override
 	public boolean hasNext() {
-		return current > tokenStream.tokens.size();
+		return current < tokenStream.tokens.size();
 	}
 
 	@Override

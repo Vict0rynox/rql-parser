@@ -12,12 +12,12 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class NodeParserChain implements NodeParser<AbstractNode> {
+public class NodeParserChain<T extends AbstractNode> implements NodeParser<T> {
 
 	/**
 	 * Node parsers list
 	 */
-	protected List<NodeParser<AbstractNode>> nodeParsers;
+	protected List<NodeParser> nodeParsers;
 
 	/**
 	 * init nodeParser by empty <code>ArrayList </code>
@@ -31,7 +31,7 @@ public class NodeParserChain implements NodeParser<AbstractNode> {
 	 * Init nodeParser chane by list;
 	 * @param nodeParsers list of nodeParser
 	 */
-	public NodeParserChain(List<NodeParser<AbstractNode>> nodeParsers)
+	public NodeParserChain(List<NodeParser> nodeParsers)
 	{
 		this.nodeParsers = nodeParsers;
 	}
@@ -39,9 +39,11 @@ public class NodeParserChain implements NodeParser<AbstractNode> {
 	/**
 	 * add new nodeParser to chain
 	 * @param nodeParser additional node parser
+	 * @return this
 	 */
-	public void addNodeParser(NodeParser<AbstractNode> nodeParser) {
+	public NodeParserChain<T> addNodeParser(NodeParser nodeParser) {
 		nodeParsers.add(nodeParser);
+		return this;
 	}
 
 	@Override
@@ -55,8 +57,8 @@ public class NodeParserChain implements NodeParser<AbstractNode> {
 	}
 
 	@Override
-	public AbstractNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
-		for (NodeParser<? extends AbstractNode> nodeParser: nodeParsers) {
+	public T parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
+		for (NodeParser<? extends T> nodeParser: nodeParsers) {
 			if(nodeParser.supports(tokenStream)) {
 				return nodeParser.parse(tokenStream);
 			}

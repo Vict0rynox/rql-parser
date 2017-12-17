@@ -14,4 +14,10 @@ public interface TypeCaster<T> {
 	 * @return token value with cast
 	 */
 	T typeCast(Token token);
+
+	/**
+	 * Return <code>TypeCaster</code> T type.
+	 * @return class type
+	 */
+	Class getType();
 }

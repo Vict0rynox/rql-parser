@@ -1,5 +1,7 @@
 package org.victorynox.rql.parser.node.query.comparison.rql;
 
+import org.victorynox.rql.TokenStreamIterator;
+import org.victorynox.rql.exception.SyntaxErrorException;
 import org.victorynox.rql.parser.TokenStreamParser;
 import org.victorynox.rql.node.operator.array.InNode;
 import org.victorynox.rql.parser.node.query.comparison.AbstractRqlNodeParser;
@@ -37,5 +39,15 @@ public class InNodeParser<V> extends AbstractRqlNodeParser<InNode<V>, V>{
 	@Override
 	protected String getOperatorName() {
 		return "in";
+	}
+
+	@Override
+	public boolean supports(TokenStreamIterator tokenStream) {
+		return super.supports(tokenStream);
+	}
+
+	@Override
+	public InNode<V> parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
+		return super.parse(tokenStream);
 	}
 }

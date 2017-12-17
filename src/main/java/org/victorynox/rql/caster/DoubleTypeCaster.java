@@ -37,4 +37,9 @@ public class DoubleTypeCaster implements TypeCaster<Double> {
 			return Double.valueOf(token.getValue());
 		}
 	}
+
+	@Override
+	public Class getType() {
+		return Double.class;
+	}
 }

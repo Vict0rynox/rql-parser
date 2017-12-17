@@ -25,4 +25,9 @@ public class BooleanTypeCaster implements TypeCaster<Boolean> {
 			return Boolean.valueOf(token.getValue());
 		}
 	}
+
+	@Override
+	public Class getType() {
+		return Boolean.class;
+	}
 }

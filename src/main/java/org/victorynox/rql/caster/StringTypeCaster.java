@@ -32,4 +32,9 @@ public class StringTypeCaster implements TypeCaster<String> {
 			return token.getValue();
 		}
 	}
+
+	@Override
+	public Class getType() {
+		return String.class;
+	}
 }

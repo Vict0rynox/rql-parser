@@ -17,18 +17,18 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public abstract class AbstractLogicalNodeParser<T extends  AbstractLogicalNode> implements NodeParser<T> {
+public abstract class AbstractLogicalNodeParser<T extends AbstractLogicalNode, V extends AbstractQueryNode> implements NodeParser<T> {
 
 	/**
 	 * Parser another <code>AbstractQueryNode</code>
 	 */
-	protected TokenStreamParser<T> conditionParser;
+	protected TokenStreamParser<V> conditionParser;
 
 	/**
 	 * Default config
 	 * @param conditionParser condition parser
 	 */
-	public AbstractLogicalNodeParser(TokenStreamParser<T> conditionParser)
+	public AbstractLogicalNodeParser(TokenStreamParser<V> conditionParser)
 	{
 		this.conditionParser = conditionParser;
 	}
@@ -56,7 +56,7 @@ public abstract class AbstractLogicalNodeParser<T extends  AbstractLogicalNode> 
 
 	@Override
 	public T parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
-		List<AbstractLogicalNode> queryList = new ArrayList<>();
+		List<V> queryList = new ArrayList<>();
 
 		tokenStream.expect(new TokenType[]{T_OPERATOR}, new String[]{getOperatorName()});
 		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS});

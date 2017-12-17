@@ -36,4 +36,9 @@ public class IntegerTypeCaster implements TypeCaster<Integer> {
 			return Integer.valueOf(token.getValue());
 		}
 	}
+
+	@Override
+	public Class getType() {
+		return Integer.class;
+	}
 }

@@ -12,14 +12,14 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class NotNodeParser extends AbstractLogicalNodeParser<NotNode> {
+public class NotNodeParser<V extends AbstractQueryNode> extends AbstractLogicalNodeParser<NotNode, V> {
 
 	/**
 	 * Default config
 	 *
 	 * @param conditionParser condition parser
 	 */
-	public NotNodeParser(TokenStreamParser<NotNode> conditionParser) {
+	public NotNodeParser(TokenStreamParser<V> conditionParser) {
 		super(conditionParser);
 	}
 

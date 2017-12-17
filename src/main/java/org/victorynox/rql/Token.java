@@ -90,7 +90,7 @@ public class Token {
 	{
 		Arrays.sort(tokenTypes);
 		int index = Arrays.binarySearch(tokenTypes, type);
-		return index != tokenTypes.length;
+		return index >= 0 && index < tokenTypes.length;
 	}
 
 	/**
@@ -101,12 +101,12 @@ public class Token {
 	{
 		Arrays.sort(tokenTypes);
 		int index = Arrays.binarySearch(tokenTypes, type);
-		if(index != tokenTypes.length) {
+		if(index < 0 || index > tokenTypes.length) {
 			return false;
 		}
 		Arrays.sort(values);
 		index = Arrays.binarySearch(values, value);
-		return index != tokenTypes.length;
+		return index >= 0 && index < values.length;
 	}
 
 }
