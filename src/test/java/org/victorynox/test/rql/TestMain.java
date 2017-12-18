@@ -3,7 +3,9 @@ package org.victorynox.test.rql;
 import org.victorynox.rql.*;
 import org.victorynox.rql.exception.SyntaxErrorException;
 import org.victorynox.rql.node.AbstractQueryNode;
+import org.victorynox.rql.node.operator.AbstractScalarNode;
 import org.victorynox.rql.node.operator.logical.AndNode;
+import org.victorynox.rql.node.operator.scalar.EqNode;
 import org.victorynox.rql.parser.RqlParser;
 import org.victorynox.rql.parser.node.NodeParser;
 import org.victorynox.rql.parser.node.QueryNodeParser;
@@ -34,7 +36,14 @@ public class TestMain {
 		TokenStream tokens = new TokenStream(tokenList);
 		try {
 			Query query = rqlParser.parse(tokens.iterator());
-			System.out.println("Parser success. Node: " + query.getQueryNode().toString());
+			AbstractQueryNode node = query.getQueryNode();
+			System.out.println("Parser success. Node: " + node.getNodeName());
+			if(node instanceof AbstractScalarNode) {
+				String nodeString = "" + node.getNodeName() + "(";
+				nodeString += ((AbstractScalarNode) node).getFiled() + ",";
+				nodeString += ((AbstractScalarNode) node).getValue().toString() + ")";
+				System.out.print(nodeString);
+			}
 		} catch (SyntaxErrorException e) {
 			e.printStackTrace();
 		}

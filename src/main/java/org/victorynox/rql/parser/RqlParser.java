@@ -52,31 +52,24 @@ public class RqlParser implements TokenStreamParser<Query>{
 		FieldParser fieldParser = new FieldParser();
 		IntegerParser integerParser = new IntegerParser();
 
-		QueryNodeParser<? extends AbstractQueryNode> queryNodeParser = new QueryNodeParser<>();
+		QueryNodeParser<AbstractQueryNode> queryNodeParser = new QueryNodeParser<>();
 
-		NodeParser<? extends AbstractQueryNode> groupNodeParser = new GroupNodeParser<>(queryNodeParser);
+        queryNodeParser
+                .addNodeParser(new GroupNodeParser<>(queryNodeParser))
 
-		NodeParser<AndNode> andNodeNodeParser = new AndNodeParser<>(queryNodeParser);
-		NodeParser<OrNode> orNodeNodeParser = new OrNodeParser<>(queryNodeParser);
-		NodeParser<NotNode> notNodeNodeParser = new NotNodeParser<>(queryNodeParser);
+                .addNodeParser(new AndNodeParser<>(queryNodeParser))
+				.addNodeParser(new OrNodeParser<>(queryNodeParser))
+				.addNodeParser(new NotNodeParser<>(queryNodeParser))
 
-		queryNodeParser
-				.addNodeParser(groupNodeParser)
-
-				.addNodeParser(andNodeNodeParser)
-				.addNodeParser(orNodeNodeParser)
-				.addNodeParser(notNodeNodeParser)
-
-				.addNodeParser(new InNodeParser(fieldParser, arrayParser))
-				.addNodeParser(new OutNodeParser(fieldParser, arrayParser))
-				.addNodeParser(new EqNodeParser(fieldParser, scalarParser))
-				.addNodeParser(new NeNodeParser(fieldParser, scalarParser))
-				.addNodeParser(new LtNodeParser(fieldParser, scalarParser))
-				.addNodeParser(new LeNodeParser(fieldParser, scalarParser))
-				.addNodeParser(new GtNodeParser(fieldParser, scalarParser))
-				.addNodeParser(new GeNodeParser(fieldParser, scalarParser))
-				.addNodeParser(new LikeNodeParser(fieldParser, globParser));
-
+                .addNodeParser(new InNodeParser<>(fieldParser, arrayParser))
+				.addNodeParser(new OutNodeParser<>(fieldParser, arrayParser))
+				.addNodeParser(new EqNodeParser<>(fieldParser, scalarParser))
+				.addNodeParser(new NeNodeParser<>(fieldParser, scalarParser))
+				.addNodeParser(new LtNodeParser<>(fieldParser, scalarParser))
+				.addNodeParser(new LeNodeParser<>(fieldParser, scalarParser))
+				.addNodeParser(new GtNodeParser<>(fieldParser, scalarParser))
+				.addNodeParser(new GeNodeParser<>(fieldParser, scalarParser))
+				.addNodeParser(new LikeNodeParser<>(fieldParser, globParser));
 		nodeParser
 				.addNodeParser(queryNodeParser)
 				.addNodeParser(new SelectNodeParser(fieldParser))

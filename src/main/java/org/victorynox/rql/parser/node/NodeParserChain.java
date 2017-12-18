@@ -17,7 +17,7 @@ public class NodeParserChain<T extends AbstractNode> implements NodeParser<T> {
 	/**
 	 * Node parsers list
 	 */
-	protected List<NodeParser> nodeParsers;
+	protected List<NodeParser<? extends T>> nodeParsers;
 
 	/**
 	 * init nodeParser by empty <code>ArrayList </code>
@@ -31,7 +31,7 @@ public class NodeParserChain<T extends AbstractNode> implements NodeParser<T> {
 	 * Init nodeParser chane by list;
 	 * @param nodeParsers list of nodeParser
 	 */
-	public NodeParserChain(List<NodeParser> nodeParsers)
+	public NodeParserChain(List<NodeParser<? extends T>> nodeParsers)
 	{
 		this.nodeParsers = nodeParsers;
 	}
@@ -41,7 +41,7 @@ public class NodeParserChain<T extends AbstractNode> implements NodeParser<T> {
 	 * @param nodeParser additional node parser
 	 * @return this
 	 */
-	public NodeParserChain<T> addNodeParser(NodeParser nodeParser) {
+	public <V extends NodeParser<? extends T>> NodeParserChain addNodeParser(V nodeParser) {
 		nodeParsers.add(nodeParser);
 		return this;
 	}
