@@ -57,11 +57,11 @@ public class GroupNodeParser<T extends AbstractQueryNode> implements NodeParser<
 					//message cannot mix & and | within a group
 					throw new SyntaxErrorException();
 				}
-			} else if (tokenStream.getCurrent().test(new TokenType[]{T_VERTICAL_BAR})) {
+			} else if (tokenStream.getCurrent().test(new TokenType[]{T_PIPE})) {
 				tokenStream.next();
 				if (operator == null) {
-					operator = T_VERTICAL_BAR;
-				} else if (operator != T_VERTICAL_BAR) {
+					operator = T_PIPE;
+				} else if (operator != T_PIPE) {
 					//message cannot mix & and | within a group
 					throw new SyntaxErrorException();
 				}
@@ -72,7 +72,7 @@ public class GroupNodeParser<T extends AbstractQueryNode> implements NodeParser<
 		} while (true);
 
 		tokenStream.expect(new TokenType[]{T_CLOSE_PARENTHESIS});
-		if (operator == T_VERTICAL_BAR) {
+		if (operator == T_PIPE) {
 			return (T) new OrNode(queryList);
 		} else if (operator == T_AMPERSAND) {
 			return (T) new AndNode(queryList);
