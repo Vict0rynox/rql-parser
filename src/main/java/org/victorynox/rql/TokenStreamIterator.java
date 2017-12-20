@@ -66,7 +66,7 @@ public class TokenStreamIterator implements Iterator<Token>{
 	{
 		Token token = getCurrent();
 		if(!token.test(tokenTypes)) {
-			throw new SyntaxErrorException();
+			throw new SyntaxErrorException("Token not pass test");
 		}
 		next();
 		return token;
@@ -82,7 +82,7 @@ public class TokenStreamIterator implements Iterator<Token>{
 	{
 		Token token = getCurrent();
 		if(!token.test(tokenTypes, values)) {
-			throw new SyntaxErrorException();
+			throw new SyntaxErrorException("Token not pass test");
 		}
 		next();
 		return token;

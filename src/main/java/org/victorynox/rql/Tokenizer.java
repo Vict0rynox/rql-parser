@@ -1,9 +1,10 @@
 package org.victorynox.rql;
 
 import org.victorynox.rql.exception.SyntaxErrorException;
-import org.victorynox.rql.lexer.Lexer;
+import org.victorynox.rql.lexer.*;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * @author victorynox
@@ -14,31 +15,50 @@ public class Tokenizer {
 	/**
 	 * SubLexer
 	 */
-	protected Lexer subLexer;
+	protected Lexer lexer;
 
 	/**
-	 * Init Tokenizer with subLexer
-	 * @param subLexer injected sub lexer
+	 * Init Tokenizer with lexer
+	 * @param lexer injected sub lexer
 	 */
-	public Tokenizer(Lexer subLexer)
+	public Tokenizer(Lexer lexer)
 	{
-		this.subLexer = subLexer;
+		this.lexer = lexer;
+	}
+
+	/**
+	 * Init tokenizer with default lexer chain
+	 */
+	public Tokenizer()
+	{
+		LexerChain lexerChain = new LexerChain();
+		lexerChain
+				.addSubLexer(new ConstantLexer())
+				.addSubLexer(new PunctuationLexer())
+				.addSubLexer(new RqlOperatorLexer())
+				.addSubLexer(new TypeLexer())
+				.addSubLexer(new GlobLexer())
+				.addSubLexer(new StringLexer())
+				.addSubLexer(new DateTimeLexer())
+				.addSubLexer(new NumberLexer())
+				.addSubLexer(new SortLexer());
+		lexer = lexerChain;
 	}
 
 	/**
 	 * Default getter
-	 * @return subLexer
+	 * @return lexer
 	 */
-	public Lexer getSubLexer() {
-		return subLexer;
+	public Lexer getLexer() {
+		return lexer;
 	}
 
 	/**
 	 * Default setter
-	 * @param subLexer another subLexer
+	 * @param lexer another lexer
 	 */
-	public void setSubLexer(Lexer subLexer) {
-		this.subLexer = subLexer;
+	public void setLexer(Lexer lexer) {
+		this.lexer = lexer;
 	}
 
 	/**
@@ -52,14 +72,12 @@ public class Tokenizer {
 		int cursor = 0;
 		ArrayList<Token> tokens = new ArrayList<>();
 		while (cursor < end) {
-			try {
-				Token token = subLexer.getTokenAt(code, cursor);
-				cursor = token.getEnd();
-				tokens.add(token);
-			} catch (ParserException e) {
-				//TODO:add message
-				//invalid char `code[cursor]` at position `cursor`
-				throw new SyntaxErrorException();
+				Optional<Token> token = lexer.getTokenAt(code, cursor);
+			if(token.isPresent()) {
+				cursor = token.get().getEnd();
+				tokens.add(token.get());
+			} else {
+				throw new SyntaxErrorException("Invalid char " + code.substring(cursor) + " at position " + cursor);
 			}
 		}
 		tokens.add(new Token(TokenType.T_END, "", cursor, cursor));

@@ -1,11 +1,9 @@
 package org.victorynox.rql.parser.node.query.logical;
 
-import org.victorynox.rql.TokenStreamIterator;
-import org.victorynox.rql.parser.TokenStreamParser;
 import org.victorynox.rql.exception.SyntaxErrorException;
 import org.victorynox.rql.node.AbstractQueryNode;
 import org.victorynox.rql.node.operator.logical.AndNode;
-import org.victorynox.rql.parser.node.NodeParser;
+import org.victorynox.rql.parser.TokenStreamParser;
 import org.victorynox.rql.parser.node.query.AbstractLogicalNodeParser;
 
 import java.util.List;
@@ -28,7 +26,7 @@ public class AndNodeParser<V extends AbstractQueryNode> extends AbstractLogicalN
 	@Override
 	protected AndNode createNode(List<? extends AbstractQueryNode> queryList) throws SyntaxErrorException {
 		if(queryList.size() < 2) {
-			throw new SyntaxErrorException();
+			throw new SyntaxErrorException("AndNode list size can't be less then tow.");
 		}
 		return new AndNode(queryList);
 	}

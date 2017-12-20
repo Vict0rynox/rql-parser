@@ -39,15 +39,16 @@ public class GlobLexer implements Lexer {
 	 * @param globString string with glob
 	 */
 	private String decodeGlob(String globString) throws SyntaxErrorException {
+		//noinspection RegExpRedundantEscape
 		Pattern pattern = Pattern.compile("[^\\*\\?]+", Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(globString);
 		while (matcher.find()) {
 			String find = matcher.group();
-			String replaceTo = null;
+			String replaceTo;
 			try {
 				replaceTo = Glob.encoded(URLDecoder.decode(find, "UTF-8"));
 			} catch (UnsupportedEncodingException e) {
-				throw new SyntaxErrorException();
+				throw new SyntaxErrorException("Unsupported encoding by decode string.");
 			}
 			globString = globString.replace(find, replaceTo);
 		}

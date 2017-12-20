@@ -7,5 +7,16 @@ import org.victorynox.rql.ParserException;
  * @version 0.1
  */
 public class SyntaxErrorException extends ParserException {
-//TODO: realize constructor with string in body
+
+	public SyntaxErrorException(String message) {
+		super(message);
+	}
+
+	public SyntaxErrorException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public SyntaxErrorException(Throwable cause) {
+		super(cause);
+	}
 }

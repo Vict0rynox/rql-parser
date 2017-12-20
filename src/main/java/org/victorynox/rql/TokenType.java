@@ -1,7 +1,5 @@
 package org.victorynox.rql;
 
-import org.victorynox.rql.exception.UnknownTokenTypeException;
-
 /**
  * @author victorynox
  * @version 0.1

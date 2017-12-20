@@ -54,16 +54,14 @@ public class GroupNodeParser<T extends AbstractQueryNode> implements NodeParser<
 				if (operator == null) {
 					operator = T_AMPERSAND;
 				} else if (operator != T_AMPERSAND) {
-					//message cannot mix & and | within a group
-					throw new SyntaxErrorException();
+					throw new SyntaxErrorException("Cannot mix & and | with in a group");
 				}
 			} else if (tokenStream.getCurrent().test(new TokenType[]{T_PIPE})) {
 				tokenStream.next();
 				if (operator == null) {
 					operator = T_PIPE;
 				} else if (operator != T_PIPE) {
-					//message cannot mix & and | within a group
-					throw new SyntaxErrorException();
+					throw new SyntaxErrorException("Cannot mix & and | with in a group");
 				}
 			} else {
 				break;
@@ -72,12 +70,16 @@ public class GroupNodeParser<T extends AbstractQueryNode> implements NodeParser<
 		} while (true);
 
 		tokenStream.expect(new TokenType[]{T_CLOSE_PARENTHESIS});
-		if (operator == T_PIPE) {
-			return (T) new OrNode(queryList);
-		} else if (operator == T_AMPERSAND) {
-			return (T) new AndNode(queryList);
-		} else {
-			return queryList.get(0);
+		assert operator != null;
+		switch (operator) {
+			case T_PIPE:
+				//noinspection unchecked
+				return (T) new OrNode(queryList);
+			case T_AMPERSAND:
+				//noinspection unchecked
+				return (T) new AndNode(queryList);
+			default:
+				return queryList.get(0);
 		}
 	}
 }

@@ -4,7 +4,6 @@ import org.victorynox.rql.Token;
 import org.victorynox.rql.TokenType;
 import org.victorynox.rql.exception.SyntaxErrorException;
 
-import java.text.NumberFormat;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

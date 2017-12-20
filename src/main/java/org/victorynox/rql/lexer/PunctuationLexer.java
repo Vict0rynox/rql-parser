@@ -2,8 +2,6 @@ package org.victorynox.rql.lexer;
 
 import org.victorynox.rql.Token;
 import org.victorynox.rql.TokenType;
-import org.victorynox.rql.exception.LexerNotFoundTokenException;
-import org.victorynox.rql.exception.SyntaxErrorException;
 
 import java.util.Optional;
 

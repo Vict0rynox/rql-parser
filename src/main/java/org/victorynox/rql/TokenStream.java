@@ -1,9 +1,6 @@
 package org.victorynox.rql;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 /**
  * @author victorynox

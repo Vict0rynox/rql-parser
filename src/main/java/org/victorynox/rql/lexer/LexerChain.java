@@ -31,9 +31,10 @@ public class LexerChain implements Lexer {
 	 * Add SubLexer to chan
 	 * @param subLexer - additional sub lexer 
 	 */
-	public void addSubLexer(Lexer subLexer)
+	public LexerChain addSubLexer(Lexer subLexer)
 	{
 		subLexerList.add(subLexer);
+		return this;
 	}
 
 	@Override

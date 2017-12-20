@@ -2,7 +2,6 @@ package org.victorynox.rql.parser.node;
 
 import org.victorynox.rql.TokenStreamIterator;
 import org.victorynox.rql.exception.SyntaxErrorException;
-import org.victorynox.rql.node.AbstractNode;
 import org.victorynox.rql.node.AbstractQueryNode;
 
 import java.util.List;

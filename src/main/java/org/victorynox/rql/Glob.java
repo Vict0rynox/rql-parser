@@ -82,9 +82,8 @@ public class Glob {
 	 */
 	public String toRegex()
 	{
-		return this.decoder(".*", ".", (String s) -> {
-			return s.replaceAll("[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]", "\\\\$0");
-		});
+		//noinspection RegExpRedundantEscape
+		return this.decoder(".*", ".", (String s) -> s.replaceAll("[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]", "\\\\$0"));
 	}
 
 	/**
