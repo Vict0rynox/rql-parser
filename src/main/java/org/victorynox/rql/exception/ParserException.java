@@ -1,4 +1,4 @@
-package org.victorynox.rql;
+package org.victorynox.rql.exception;
 
 /**
  * @author victorynox

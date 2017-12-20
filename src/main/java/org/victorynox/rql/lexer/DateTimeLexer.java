@@ -29,7 +29,7 @@ public class DateTimeLexer implements Lexer{
 		}
 
 		if(!validateFormatDate(matcher.group("formatDate"))) {
-			throw new SyntaxErrorException();
+			throw new SyntaxErrorException("Date has not valid format. Expected " + DATE_FORMAT);
 		}
 
 		return Optional.of(new Token(
@@ -49,7 +49,7 @@ public class DateTimeLexer implements Lexer{
 	{
 		//This method not 'best practice', but in 0.0.1 is 'normal' solution.... See 'HIDE THE PAIN'
 		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat(DateTimeLexer.DATE_FORMAT);
+			SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 			dateFormat.setLenient(false);
 			dateFormat.parse(formatDate);
 			return true;

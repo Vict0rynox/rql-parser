@@ -14,7 +14,7 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class InNodeParser<V extends ScalarValue> extends AbstractRqlNodeParser<InNode<V>, V>{
+public class InNodeParser<V> extends AbstractRqlNodeParser<InNode<V>, V>{
 
 	/**
 	 * Default constructor

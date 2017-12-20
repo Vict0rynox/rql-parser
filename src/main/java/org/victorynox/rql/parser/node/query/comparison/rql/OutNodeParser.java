@@ -12,7 +12,7 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class OutNodeParser<V extends ScalarValue> extends AbstractRqlNodeParser<OutNode<V>, V> {
+public class OutNodeParser<V> extends AbstractRqlNodeParser<OutNode<V>, V> {
 
 	/**
 	 * Default constructor

@@ -10,7 +10,7 @@ import org.victorynox.rql.parser.value.ScalarValue;
  * @version 0.1
  * @param <T> type value
  */
-public class LikeNode<T extends ScalarValue> extends AbstractScalarNode<T> {
+public class LikeNode<T> extends AbstractScalarNode<T> {
 	/**
 	 * @param field - name which been searched
 	 * @param value - appropriate searched value

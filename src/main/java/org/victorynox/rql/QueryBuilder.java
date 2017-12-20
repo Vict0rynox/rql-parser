@@ -46,7 +46,7 @@ public class QueryBuilder {
 		} else if (node instanceof LimitNode) {
 			return addLimit((LimitNode)node);
 		}
-		throw new UnknownNodeException();
+		throw new UnknownNodeException("Find unknown node with name:" + node.getNodeName());
 	}
 
 	/**

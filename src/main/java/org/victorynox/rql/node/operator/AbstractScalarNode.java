@@ -8,7 +8,7 @@ import org.victorynox.rql.parser.value.ScalarValue;
  * @version 0.1
  * @param <T> node value type
  */
-public abstract class AbstractScalarNode<T extends ScalarValue> extends AbstractComparisonNode<T> {
+public abstract class AbstractScalarNode<T> extends AbstractComparisonNode<T> {
 
 	/**
 	 * Node value

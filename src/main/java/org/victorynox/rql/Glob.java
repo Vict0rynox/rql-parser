@@ -40,7 +40,7 @@ public class Glob {
 	 * @param repChars array with escaped char
 	 * @return escaped string
 	 */
-	protected static String escaped(String value, String[] repChars)
+	private static String escaped(String value, String[] repChars)
 	{
 		for (String repChar : repChars) {
 			if(value.contains(repChar)) {
@@ -83,7 +83,7 @@ public class Glob {
 	public String toRegex()
 	{
 		//noinspection RegExpRedundantEscape
-		return this.decoder(".*", ".", (String s) -> s.replaceAll("[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]", "\\\\$0"));
+		return this.decoder(".*", ".", (String s) -> s.replaceAll("[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]", "\\$0"));
 	}
 
 	/**

@@ -82,8 +82,8 @@ public class ScalarParser implements TokenStreamParser<ScalarValue> {
 		typeName = typeNameAliases.getOrDefault(typeName, typeName);
 		TypeCaster typeCaster = typeCasterMap.get(typeName);
 		if(typeCaster == null) {
-			//TODO: add message.
-			throw new SyntaxErrorException();
+			//TODO: change exception type
+			throw new SyntaxErrorException("Type caster not found.");
 		}
 		return typeCaster;
 	}
@@ -129,7 +129,7 @@ public class ScalarParser implements TokenStreamParser<ScalarValue> {
 				Date date = DateFormat.getInstance().parse(token.getValue());
 				return new ScalarValue<>(date);
 			} catch (ParseException e) {
-				throw new SyntaxErrorException();
+				throw new SyntaxErrorException("Date is not valid.");
 			}
 		} else if (token.test(new TokenType[]{TokenType.T_STRING})) {
 			return new ScalarValue<>(token.getValue());
@@ -138,7 +138,7 @@ public class ScalarParser implements TokenStreamParser<ScalarValue> {
 		} else if (token.test(new TokenType[]{TokenType.T_FLOAT})) {
 			return new ScalarValue<>(Double.parseDouble(token.getValue()));
 		}
-		throw new SyntaxErrorException();
+		throw new SyntaxErrorException("Unknown value type.");
 	}
 
 	@Override

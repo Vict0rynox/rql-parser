@@ -87,8 +87,7 @@ public class RqlParser implements TokenStreamParser<Query>{
 					tokenStream.next();
 				}
 			} catch (UnknownNodeException e) {
-				//TODO: add message
-				throw new SyntaxErrorException();
+				throw new SyntaxErrorException("Find UnknownNode", e);
 			}
 		}
 		return queryBuilder.getQuery();

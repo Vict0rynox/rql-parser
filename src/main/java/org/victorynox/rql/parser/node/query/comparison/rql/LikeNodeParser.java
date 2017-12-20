@@ -9,7 +9,7 @@ import org.victorynox.rql.parser.value.ScalarValue;
  * @author victorynox
  * @version 0.1
  */
-public class LikeNodeParser<V extends ScalarValue> extends AbstractRqlNodeParser<LikeNode<V>, V> {
+public class LikeNodeParser<V> extends AbstractRqlNodeParser<LikeNode<V>, V> {
 	/**
 	 * Default constructor
 	 *
