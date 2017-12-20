@@ -4,7 +4,7 @@ package org.victorynox.rql.parser.value;
  * @author victorynox
  * @version 0.1
  */
-public class ScalarValue<T> {
+public class ScalarValue<T>{
 
 	protected final T value;
 

@@ -1,11 +1,11 @@
 package org.victorynox.rql.lexer;
 
-import org.victorynox.rql.ParserException;
 import org.victorynox.rql.Token;
-import org.victorynox.rql.lexer.Lexer;
+import org.victorynox.rql.exception.SyntaxErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * SubLexer chain with lexer list
@@ -37,14 +37,13 @@ public class LexerChain implements Lexer {
 	}
 
 	@Override
-	public Token getTokenAt(String code, int cursor) throws ParserException {
+	public Optional<Token> getTokenAt(String code, int cursor) throws SyntaxErrorException {
 		for (Lexer subLexer : subLexerList) {
-			try {
-				return subLexer.getTokenAt(code, cursor);
-			} catch (ParserException ignored) {
-				//TODO: rewrite this with optional or add method hasTokenAt() to <code>Lexer</code>
+			Optional<Token> token =  subLexer.getTokenAt(code, cursor);
+			if(token.isPresent()) {
+				return token;
 			}
 		}
-		throw new ParserException();
+		return Optional.empty();
 	}
 }

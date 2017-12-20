@@ -2,8 +2,8 @@ package org.victorynox.rql.lexer;
 
 import org.victorynox.rql.Token;
 import org.victorynox.rql.TokenType;
-import org.victorynox.rql.exception.LexerNotFoundTokenException;
-import org.victorynox.rql.exception.SyntaxErrorException;
+
+import java.util.Optional;
 
 /**
  * Tokenize sort type
@@ -12,15 +12,15 @@ import org.victorynox.rql.exception.SyntaxErrorException;
  */
 public class SortLexer implements Lexer {
 	@Override
-	public Token getTokenAt(String code, int cursor) throws LexerNotFoundTokenException, SyntaxErrorException {
+	public Optional<Token> getTokenAt(String code, int cursor) {
 		String test = code.substring(cursor, 1);
 		switch (test) {
 			case "+":
-				return new Token(TokenType.T_PLUS, test, cursor, cursor + 1);
+				return Optional.of(new Token(TokenType.T_PLUS, test, cursor, cursor + 1));
 			case "-":
-				return new Token(TokenType.T_MINUS, test, cursor, cursor + 1);
+				return Optional.of(new Token(TokenType.T_MINUS, test, cursor, cursor + 1));
 			default:
-				throw new LexerNotFoundTokenException();
+				return Optional.empty();
 		}
 	}
 }

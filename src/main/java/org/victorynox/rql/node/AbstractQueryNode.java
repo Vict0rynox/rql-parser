@@ -5,6 +5,6 @@ package org.victorynox.rql.node;
  * @author victorynox
  * @version 0.1
  */
-public abstract class AbstractQueryNode extends AbstractNode{
+public abstract class AbstractQueryNode extends AbstractNode {
 
 }

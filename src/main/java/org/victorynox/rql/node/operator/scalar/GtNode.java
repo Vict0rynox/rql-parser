@@ -1,6 +1,7 @@
 package org.victorynox.rql.node.operator.scalar;
 
 import org.victorynox.rql.node.operator.AbstractScalarNode;
+import org.victorynox.rql.parser.value.ScalarValue;
 
 /**
  * Gt - grate then (>).
@@ -9,7 +10,7 @@ import org.victorynox.rql.node.operator.AbstractScalarNode;
  * @version 0.1
  * @param <T> type value
  */
-public class GtNode<T> extends AbstractScalarNode<T> {
+public class GtNode<T extends ScalarValue> extends AbstractScalarNode<T> {
 	/**
 	 * @param field - name which been searched
 	 * @param value - appropriate searched value

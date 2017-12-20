@@ -5,6 +5,8 @@ import org.victorynox.rql.TokenType;
 import org.victorynox.rql.exception.LexerNotFoundTokenException;
 import org.victorynox.rql.exception.SyntaxErrorException;
 
+import java.util.Optional;
+
 /**
  * Tokenize singe system punctuation char.
  * @author victorynox
@@ -12,23 +14,23 @@ import org.victorynox.rql.exception.SyntaxErrorException;
  */
 public class PunctuationLexer implements Lexer {
 	@Override
-	public Token getTokenAt(String code, int cursor) throws LexerNotFoundTokenException, SyntaxErrorException {
+	public Optional<Token> getTokenAt(String code, int cursor) {
 		String test = code.substring(cursor, 1);
 
 		switch (test) {
 			case "&":
-				return new Token(TokenType.T_AMPERSAND, test, cursor, cursor + 1);
+				return Optional.of(new Token(TokenType.T_AMPERSAND, test, cursor, cursor + 1));
 			case "|":
-				return new Token(TokenType.T_PIPE, test, cursor, cursor + 1);
+				return Optional.of(new Token(TokenType.T_PIPE, test, cursor, cursor + 1));
 			case ",":
-				return new Token(TokenType.T_COMMA, test, cursor, cursor + 1);
+				return Optional.of(new Token(TokenType.T_COMMA, test, cursor, cursor + 1));
 			case "(":
-				return new Token(TokenType.T_OPEN_PARENTHESIS, test, cursor, cursor + 1);
+				return Optional.of(new Token(TokenType.T_OPEN_PARENTHESIS, test, cursor, cursor + 1));
 			case ")":
-				return new Token(TokenType.T_CLOSE_PARENTHESIS, test, cursor, cursor + 1);
+				return Optional.of(new Token(TokenType.T_CLOSE_PARENTHESIS, test, cursor, cursor + 1));
 			case ":":
-				return new Token(TokenType.T_COLON, test, cursor, cursor + 1);
+				return Optional.of(new Token(TokenType.T_COLON, test, cursor, cursor + 1));
 		}
-		throw new LexerNotFoundTokenException();
+		return Optional.empty();
 	}
 }

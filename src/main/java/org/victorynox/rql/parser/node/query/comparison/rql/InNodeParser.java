@@ -5,6 +5,7 @@ import org.victorynox.rql.exception.SyntaxErrorException;
 import org.victorynox.rql.parser.TokenStreamParser;
 import org.victorynox.rql.node.operator.array.InNode;
 import org.victorynox.rql.parser.node.query.comparison.AbstractRqlNodeParser;
+import org.victorynox.rql.parser.value.ScalarValue;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class InNodeParser<V> extends AbstractRqlNodeParser<InNode<V>, V>{
+public class InNodeParser<V extends ScalarValue> extends AbstractRqlNodeParser<InNode<V>, V>{
 
 	/**
 	 * Default constructor

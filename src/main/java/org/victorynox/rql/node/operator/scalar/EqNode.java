@@ -1,6 +1,7 @@
 package org.victorynox.rql.node.operator.scalar;
 
 import org.victorynox.rql.node.operator.AbstractScalarNode;
+import org.victorynox.rql.parser.value.ScalarValue;
 
 /**
  * Eq - equals node (=).
@@ -9,7 +10,7 @@ import org.victorynox.rql.node.operator.AbstractScalarNode;
  * @version 0.1
  * @param <T> type value
  */
-public class EqNode<T> extends AbstractScalarNode<T>{
+public class EqNode<T extends ScalarValue> extends AbstractScalarNode<T>{
 
 	/**
 	 * @param field - name which been searched
