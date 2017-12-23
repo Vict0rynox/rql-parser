@@ -1,6 +1,7 @@
 package org.victorynox.rql;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -65,6 +66,8 @@ public class Glob {
 			try {
 				//TODO: refactor.
 				s = URLEncoder.encode(s, "UTF-8");
+				s = s.replace("+","%20");
+				s = s.replace("*","%2A");
 				s = s.replace("-","%2D");
 				s = s.replace("_","%5F");
 				s = s.replace(".","%2E");
@@ -110,7 +113,7 @@ public class Glob {
 		String result = this.glob;
 
 		//TODO: refactor this.
-		Pattern pattern = Pattern.compile("\\\\\\\\.|\\*|\\?|.");
+		Pattern pattern = Pattern.compile("\\\\.|\\*|\\?|.");
 		Matcher matcher = pattern.matcher(result);
 		while (matcher.find()) {
 			//TODO: if replaced char equals to find char - while is looped.
@@ -126,12 +129,11 @@ public class Glob {
 				default:
 					//TODO: add remove escape slash
 					String randomHash = "pTKg1fX3mPVFcj6ICWGCao6U2FsF3SLCVozmBNfUmov";
-					find = find.replaceAll("\\\\\\\\", randomHash); //avoid removed slash escaping
+					String val = find.replaceAll("\\\\\\\\", randomHash); //avoid removed slash escaping
+					val = val.replaceAll("\\\\", "");
+					val = val.replaceAll(randomHash, "\\\\"); //avoid removed slash escaping
 
-					find = find.replaceAll("\\\\", "");
-					find = find.replaceAll(randomHash, "\\\\"); //avoid removed slash escaping
-
-					replaceTo = escaper.apply(find);
+					replaceTo = escaper.apply(val);
 					break;
 			}
 			result = result.replace(find, replaceTo);
