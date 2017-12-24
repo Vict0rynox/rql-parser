@@ -27,9 +27,12 @@ public class DoubleTypeCaster implements TypeCaster<Double> {
 			return 0.;
 		} else if (token.test(new TokenType[]{TokenType.T_DATE})) {
 			try {
-				Date date = DateFormat.getInstance().parse(token.getValue());
-				SimpleDateFormat dateFormat = new SimpleDateFormat("YmdHis");
-				return Double.valueOf(dateFormat.format(date));
+				final DateFormat fromDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+				fromDateFormat.setLenient(false);
+				Date date = fromDateFormat.parse(token.getValue());
+				final SimpleDateFormat toDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+				String formatData = toDateFormat.format(date);
+				return Double.valueOf(formatData);
 			} catch (ParseException e) {
 				return 0.;
 			}

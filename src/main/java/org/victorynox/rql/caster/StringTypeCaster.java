@@ -4,6 +4,7 @@ import org.victorynox.rql.Token;
 import org.victorynox.rql.TokenType;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
@@ -15,16 +16,16 @@ public class StringTypeCaster implements TypeCaster<String> {
 	@Override
 	public String typeCast(Token token) {
 		if(token.test(new TokenType[]{TokenType.T_NULL})) {
-			return "false";
+			return "null";
 		} else if (token.test(new TokenType[]{TokenType.T_TRUE})) {
 			return "true";
 		} else if (token.test(new TokenType[]{TokenType.T_FALSE})) {
 			return "false";
 		} else if (token.test(new TokenType[]{TokenType.T_EMPTY})) {
-			return "false";
+			return "";
 		} else if (token.test(new TokenType[]{TokenType.T_DATE})) {
 			try {
-				return URLEncoder.encode(token.getValue(), "UTF-8");
+				return URLDecoder.decode(token.getValue(), "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				return "";
 			}

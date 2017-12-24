@@ -26,14 +26,17 @@ public class IntegerTypeCaster implements TypeCaster<Integer> {
 			return 0;
 		} else if (token.test(new TokenType[]{TokenType.T_DATE})) {
 			try {
-				Date date = DateFormat.getInstance().parse(token.getValue());
-				SimpleDateFormat dateFormat = new SimpleDateFormat("YmdHis");
-				return Integer.valueOf(dateFormat.format(date));
+				final DateFormat fromDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+				fromDateFormat.setLenient(false);
+				Date date = fromDateFormat.parse(token.getValue());
+				final SimpleDateFormat toDateFormat = new SimpleDateFormat("yyyyMMddHH");
+				String formatData = toDateFormat.format(date);
+				return Integer.valueOf(formatData);
 			} catch (ParseException e) {
 				return 0;
 			}
 		} else {
-			return Integer.valueOf(token.getValue());
+			return Double.valueOf(token.getValue()).intValue();
 		}
 	}
 
