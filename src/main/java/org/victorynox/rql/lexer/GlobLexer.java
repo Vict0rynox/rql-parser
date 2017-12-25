@@ -20,12 +20,11 @@ public class GlobLexer implements Lexer {
 
 	@Override
 	public Optional<Token> getTokenAt(String code, int cursor) throws SyntaxErrorException {
-		Pattern pattern = Pattern.compile("", Pattern.CASE_INSENSITIVE);
+		Pattern pattern = Pattern.compile("^([a-z0-9\\?\\*]|\\%[0-9a-f]{2})+", Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(code.substring(cursor));
-		if (!matcher.matches() || (!matcher.group().contains("*") && !matcher.group().contains("?"))) {
+		if (!matcher.find() || (!matcher.group().contains("*") && !matcher.group().contains("?"))) {
 			return Optional.empty();
 		}
-
 		return Optional.of(new Token(
 				TokenType.T_GLOB,
 				decodeGlob(matcher.group()),

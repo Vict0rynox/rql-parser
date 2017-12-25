@@ -15,9 +15,9 @@ public class TypeLexer implements Lexer {
 
 	@Override
 	public Optional<Token> getTokenAt(String code, int cursor) {
-		Pattern pattern = Pattern.compile("[a-z]\\w*(?=:)", Pattern.CASE_INSENSITIVE);
+		Pattern pattern = Pattern.compile("^[a-z]\\w*(?=:)", Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(code.substring(cursor));
-		if(!matcher.matches()) {
+		if(!matcher.find()) {
 			return Optional.empty();
 		}
 		return Optional.of(new Token(

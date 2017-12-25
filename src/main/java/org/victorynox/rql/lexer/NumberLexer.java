@@ -16,10 +16,10 @@ import java.util.regex.Pattern;
  */
 public class NumberLexer implements Lexer {
 	@Override
-	public Optional<Token> getTokenAt(String code, int cursor) throws SyntaxErrorException {
-		Pattern pattern = Pattern.compile("[-+]?[\\d]*\\.?[\\d]+(?:[eE][-+]?[\\d]+)?");
+	public Optional<Token> getTokenAt(String code, int cursor) {
+		Pattern pattern = Pattern.compile("^[-+]?[\\d]*\\.?[\\d]+(?:[eE][-+]?[\\d]+)?");
 		Matcher matcher = pattern.matcher(code.substring(cursor));
-		if (matcher.matches()) {
+		if (!matcher.find()) {
 			return Optional.empty();
 		}
 

@@ -17,9 +17,9 @@ public class StringLexer implements Lexer{
 	@Override
 	public Optional<Token> getTokenAt(String code, int cursor) throws SyntaxErrorException {
 
-		Pattern pattern = Pattern.compile("([a-z0-9]|\\%[a-z0-9]{2})", Pattern.CASE_INSENSITIVE);
+		Pattern pattern = Pattern.compile("^([a-z0-9]|\\%[0-9a-f]{2})+", Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(code.substring(cursor));
-		if(!matcher.matches() || matcher.group().matches("[-+]?[0-9]+")) {
+		if(!matcher.find() || matcher.group().matches("[-+]?[0-9\\.]+")) {
 			return Optional.empty();
 		}
 

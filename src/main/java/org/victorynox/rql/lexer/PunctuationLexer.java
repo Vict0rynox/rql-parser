@@ -13,8 +13,7 @@ import java.util.Optional;
 public class PunctuationLexer implements Lexer {
 	@Override
 	public Optional<Token> getTokenAt(String code, int cursor) {
-		String test = code.substring(cursor, 1);
-
+		String test = code.substring(cursor, cursor + 1);
 		switch (test) {
 			case "&":
 				return Optional.of(new Token(TokenType.T_AMPERSAND, test, cursor, cursor + 1));

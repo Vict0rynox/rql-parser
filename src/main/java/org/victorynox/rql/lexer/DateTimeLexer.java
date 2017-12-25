@@ -23,7 +23,7 @@ public class DateTimeLexer implements Lexer{
 
 	@Override
 	public Optional<Token> getTokenAt(String code, int cursor) throws SyntaxErrorException {
-		Pattern pattern = Pattern.compile("(?<formatDate>(?<y>\\d{4})-(?<m>\\d{2})-(?<d>\\d{2})T(?<h>\\d{2}):(?<i>\\d{2}):(?<s>\\d{2}))Z");
+		Pattern pattern = Pattern.compile("^(?<formatDate>(?<y>\\d{4})-(?<m>\\d{2})-(?<d>\\d{2})T(?<h>\\d{2}):(?<i>\\d{2}):(?<s>\\d{2}))Z");
 		Matcher matcher = pattern.matcher(code.substring(cursor));
 		if(!matcher.find()) {
 			return Optional.empty();
