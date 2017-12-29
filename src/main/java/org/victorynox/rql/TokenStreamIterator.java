@@ -30,7 +30,7 @@ public class TokenStreamIterator implements Iterator<Token>{
 
 	@Override
 	public boolean hasNext() {
-		return current < tokenStream.tokens.size();
+		return current + 1 < tokenStream.tokens.size();
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class TokenStreamIterator implements Iterator<Token>{
 	 * @return Token
 	 * @throws NoSuchElementException if element not found
 	 */
-	public Token lookAheard(int number) throws NoSuchElementException
+	public Token lookAhead(int number) throws NoSuchElementException
 	{
 		if(this.tokenStream.tokens.size() < current + number) {
 			throw new NoSuchElementException();
@@ -68,7 +68,9 @@ public class TokenStreamIterator implements Iterator<Token>{
 		if(!token.test(tokenTypes)) {
 			throw new SyntaxErrorException("Token not pass test");
 		}
-		next();
+		if(hasNext()) {
+			next();
+		}
 		return token;
 	}
 
@@ -84,7 +86,9 @@ public class TokenStreamIterator implements Iterator<Token>{
 		if(!token.test(tokenTypes, values)) {
 			throw new SyntaxErrorException("Token not pass test");
 		}
-		next();
+		if(hasNext()) {
+			next();
+		}
 		return token;
 	}
 
