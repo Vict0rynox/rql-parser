@@ -116,13 +116,13 @@ public class ScalarParser implements TokenStreamParser<ScalarValue> {
 	 * @return <code>ScalarValue</code> with value type
 	 */
 	protected ScalarValue createScalarValue(Token token) throws SyntaxErrorException {
-		if (token.test(new TokenType[]{TokenType.T_FALSE})) {
+		if (token.test(new TokenType[]{TokenType.T_FALSE}, new String[]{"false()"})) {
 			return new ScalarValue<>(false);
-		} else if (token.test(new TokenType[]{TokenType.T_TRUE})) {
+		} else if (token.test(new TokenType[]{TokenType.T_TRUE}, new String[]{"true()"})) {
 			return new ScalarValue<>(true);
-		} else if (token.test(new TokenType[]{TokenType.T_NULL})) {
+		} else if (token.test(new TokenType[]{TokenType.T_NULL}, new String[]{"null()"})) {
 			return new ScalarValue<>(null);
-		} else if (token.test(new TokenType[]{TokenType.T_EMPTY})) {
+		} else if (token.test(new TokenType[]{TokenType.T_EMPTY}, new String[]{""})) {
 			return new ScalarValue<>("");
 		} else if (token.test(new TokenType[]{TokenType.T_DATE})) {
 			try {
@@ -145,13 +145,16 @@ public class ScalarParser implements TokenStreamParser<ScalarValue> {
 	public ScalarValue parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
 		ScalarValue scalarValue;
 		if(tokenStream.getCurrent().test(new TokenType[]{TokenType.T_TYPE})) {
-			Token typeToken = tokenStream.next();
+			Token typeToken = tokenStream.getCurrent();
+			tokenStream.next();
 			tokenStream.expect(new TokenType[]{TokenType.T_COLON});
 			scalarValue = createScalarValue(typeToken, tokenStream.getCurrent());
 		} else {
 			scalarValue = createScalarValue(tokenStream.getCurrent());
 		}
-		tokenStream.next();
+		if(tokenStream.hasNext()) {
+			tokenStream.next();
+		}
 		return scalarValue;
 	}
 

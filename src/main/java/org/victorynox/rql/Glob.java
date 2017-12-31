@@ -2,6 +2,7 @@ package org.victorynox.rql;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -147,4 +148,20 @@ public class Glob {
 		return result.toString();
 	}
 
+	/**
+	 * @param o - comparable object
+	 * @return bool
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Glob glob1 = (Glob) o;
+		return glob.equals(glob1.glob);
+	}
+
+	@Override
+	public int hashCode() {
+		return glob.hashCode();
+	}
 }

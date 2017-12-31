@@ -24,13 +24,16 @@ public class GlobParser implements TokenStreamParser<Glob> {
 	public Glob parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
 		if (tokenStream.getCurrent().test(new TokenType[]{TokenType.T_GLOB})) {
 			Glob glob = new Glob(tokenStream.getCurrent().getValue());
-			tokenStream.next();
+			if(tokenStream.hasNext()) {
+				tokenStream.next();
+			}
 			return glob;
 		}
 		if (tokenStream.getCurrent().test(new TokenType[]{TokenType.T_TYPE}, new String[]{"glob"})) {
 			tokenStream.next();
 			tokenStream.expect(new TokenType[]{TokenType.T_COLON});
+			return new Glob(Glob.encoded(tokenStream.expect(GlobParser.allowedType).getValue()));
 		}
-		return new Glob(Glob.encoded(tokenStream.expect(GlobParser.allowedType).getValue()));
+		throw new SyntaxErrorException("Glob not exist.");
 	}
 }
