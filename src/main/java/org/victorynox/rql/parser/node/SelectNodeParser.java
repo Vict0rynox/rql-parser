@@ -14,7 +14,7 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public class SelectNodeParser implements NodeParser {
+public class SelectNodeParser implements NodeParser<SelectNode> {
 
 	/**
 	 * field name parser with string type.
@@ -39,12 +39,12 @@ public class SelectNodeParser implements NodeParser {
 	}
 
 	@Override
-	public AbstractNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
+	public SelectNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
 
 		ArrayList<String> filedNameList = new ArrayList<>();
 
 		tokenStream.expect(new TokenType[]{T_OPERATOR}, new String[]{"select"});
-		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS});
+		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS}, new String[]{"("});
 
 		do {
 			filedNameList.add(fieldNameParser.parse(tokenStream));
@@ -54,7 +54,7 @@ public class SelectNodeParser implements NodeParser {
 			tokenStream.next();
 		} while (true);
 
-		tokenStream.expect(new TokenType[]{T_CLOSE_PARENTHESIS});
+		tokenStream.expect(new TokenType[]{T_CLOSE_PARENTHESIS}, new String[]{")"});
 
 		return new SelectNode(filedNameList);
 	}

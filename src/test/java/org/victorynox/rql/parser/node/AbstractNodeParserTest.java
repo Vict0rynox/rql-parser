@@ -34,11 +34,28 @@ abstract class AbstractNodeParserTest<T extends AbstractNode> extends AbstractPa
 		return Stream.empty();
 	}
 
+	/**
+	 * Return invalid tokenStream data for cache exception test
+	 *
+	 * @return stream
+	 */
+	protected static Stream<TokenStreamIterator> getParseSyntaxErrorExceptionData() {
+		return Stream.empty();
+	}
+
 	@ParameterizedTest
 	@MethodSource("getSupportSuccessData")
 	void supports(TokenStreamIterator tokenStreamIterator) {
 		assertTrue(parser.supports(tokenStreamIterator));
 	}
+
+	/**
+	 * Compare expected result and parse result.
+	 *
+	 * @param expectedResult expected node
+	 * @param result         node which been return after parse
+	 */
+	abstract protected void parseResultAssert(T expectedResult, T result);
 
 	@ParameterizedTest
 	@MethodSource("getParseSuccessData")
@@ -46,8 +63,15 @@ abstract class AbstractNodeParserTest<T extends AbstractNode> extends AbstractPa
 		try {
 			T result = parser.parse(tokenStreamIterator);
 			assertEquals(expectedResult.getNodeName(), result.getNodeName());
+			parseResultAssert(expectedResult, result);
 		} catch (SyntaxErrorException e) {
 			fail(e);
 		}
+	}
+
+	@ParameterizedTest
+	@MethodSource("getParseSyntaxErrorExceptionData")
+	void parse_SyntaxErrorException(TokenStreamIterator tokenStreamIterator) {
+		assertThrows(SyntaxErrorException.class, () -> parser.parse(tokenStreamIterator));
 	}
 }
