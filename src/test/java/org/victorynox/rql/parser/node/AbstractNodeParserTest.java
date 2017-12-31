@@ -1,19 +1,29 @@
-package org.victorynox.rql.parser;
+package org.victorynox.rql.parser.node;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.victorynox.rql.TokenStreamIterator;
 import org.victorynox.rql.exception.SyntaxErrorException;
+import org.victorynox.rql.node.AbstractNode;
+import org.victorynox.rql.parser.AbstractParserTest;
 
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public abstract class AbstractParserTest<T> {
+abstract class AbstractNodeParserTest<T extends AbstractNode> extends AbstractParserTest<T> {
 
-	protected TokenStreamParser<T> parser;
+	protected NodeParser<T> parser;
+
+	/**
+	 * Return valid tokenStream data for parse
+	 *
+	 * @return stream
+	 */
+	protected static Stream<TokenStreamIterator> getSupportSuccessData() {
+		return Stream.empty();
+	}
 
 	/**
 	 * Return valid tokenStream data for parse
@@ -24,36 +34,20 @@ public abstract class AbstractParserTest<T> {
 		return Stream.empty();
 	}
 
-	/**
-	 * Return invalid tokenStream data for cache exception test
-	 *
-	 * @return stream
-	 */
-	protected static Stream<TokenStreamIterator> getParseSyntaxErrorExceptionData() {
-		return Stream.empty();
+	@ParameterizedTest
+	@MethodSource("getSupportSuccessData")
+	void supports(TokenStreamIterator tokenStreamIterator) {
+		assertTrue(parser.supports(tokenStreamIterator));
 	}
-
-	/**
-	 * Init parser
-	 */
-	@BeforeEach
-	abstract protected void startUp();
 
 	@ParameterizedTest
 	@MethodSource("getParseSuccessData")
 	void parse_Success(TokenStreamIterator tokenStreamIterator, T expectedResult) {
 		try {
 			T result = parser.parse(tokenStreamIterator);
-			assertEquals(expectedResult, result);
+			assertEquals(expectedResult.getNodeName(), result.getNodeName());
 		} catch (SyntaxErrorException e) {
 			fail(e);
 		}
-	}
-
-
-	@ParameterizedTest
-	@MethodSource("getParseSyntaxErrorExceptionData")
-	void parse_SyntaxErrorException(TokenStreamIterator tokenStreamIterator) {
-		assertThrows(SyntaxErrorException.class, () -> parser.parse(tokenStreamIterator));
 	}
 }
