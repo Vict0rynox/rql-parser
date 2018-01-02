@@ -16,7 +16,7 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public class SortNodeParser implements NodeParser {
+public class SortNodeParser implements NodeParser<SortNode> {
 
 	/**
 	 * fieldNameParser
@@ -41,15 +41,15 @@ public class SortNodeParser implements NodeParser {
 	}
 
 	@Override
-	public AbstractNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
+	public SortNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
 
 		HashMap<String, SortType> filedSortMap = new HashMap<>();
 
-		tokenStream.expect(new TokenType[]{T_OPERATOR}, new String[]{"select"});
-		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS});
+		tokenStream.expect(new TokenType[]{T_OPERATOR}, new String[]{"sort"});
+		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS}, new String[]{"("});
 
 		do {
-			Token direction = tokenStream.expect(new TokenType[]{T_PLUS, T_MINUS});
+			Token direction = tokenStream.expect(new TokenType[]{T_PLUS, T_MINUS}, new String[]{"+", "-"});
 			String filedName = fieldNameParser.parse(tokenStream);
 			SortType sortType = direction.test(new TokenType[]{T_PLUS}) ? SortType.SORT_ACS : SortType.SORT_DESC;
 
@@ -61,7 +61,7 @@ public class SortNodeParser implements NodeParser {
 			tokenStream.next();
 		} while (true);
 
-		tokenStream.expect(new TokenType[]{T_CLOSE_PARENTHESIS});
+		tokenStream.expect(new TokenType[]{T_CLOSE_PARENTHESIS}, new String[]{")"});
 		return new SortNode(filedSortMap);
 	}
 }
