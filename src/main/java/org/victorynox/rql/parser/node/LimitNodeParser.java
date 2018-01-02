@@ -14,7 +14,7 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public class LimitNodeParser implements NodeParser {
+public class LimitNodeParser implements NodeParser<LimitNode> {
 
 	/**
 	 * int ValueParser
@@ -39,17 +39,18 @@ public class LimitNodeParser implements NodeParser {
 	}
 
 	@Override
-	public AbstractNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
+	public LimitNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
 		tokenStream.expect(new TokenType[]{T_OPERATOR}, new String[]{"limit"});
-		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS});
+		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS}, new String[]{"("});
 
 		int limit = valueParser.parse(tokenStream);
 		int offset = 0;
 		if(tokenStream.getCurrent().test(new TokenType[]{T_COMMA})) {
+			tokenStream.next();
 			offset = valueParser.parse(tokenStream);
 		}
 
-		tokenStream.expect(new TokenType[]{T_CLOSE_PARENTHESIS});
+		tokenStream.expect(new TokenType[]{T_CLOSE_PARENTHESIS}, new String[]{")"});
 
 		return new LimitNode(limit, offset);
 	}
