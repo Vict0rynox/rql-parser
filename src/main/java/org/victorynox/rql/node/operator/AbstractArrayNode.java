@@ -2,6 +2,7 @@ package org.victorynox.rql.node.operator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Abstraction for array node
@@ -60,5 +61,20 @@ public abstract class AbstractArrayNode<T> extends AbstractComparisonNode<T> {
 	public void addValue(T value)
 	{
 		this.values.add(value);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		AbstractArrayNode<?> that = (AbstractArrayNode<?>) o;
+		return Objects.equals(values, that.values);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(super.hashCode(), values);
 	}
 }

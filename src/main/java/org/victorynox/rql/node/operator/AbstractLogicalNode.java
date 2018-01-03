@@ -4,6 +4,7 @@ import org.victorynox.rql.node.AbstractQueryNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Abstraction for logical node
@@ -47,5 +48,20 @@ public abstract class AbstractLogicalNode extends AbstractQueryNode {
 	 */
 	public void setQueries(List<? extends AbstractQueryNode> queries) {
 		this.queries = queries;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		AbstractLogicalNode that = (AbstractLogicalNode) o;
+		return Objects.equals(queries, that.queries);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(super.hashCode(), queries);
 	}
 }
