@@ -7,16 +7,15 @@ import org.victorynox.rql.TokenStream;
 import org.victorynox.rql.TokenStreamIterator;
 import org.victorynox.rql.TokenType;
 import org.victorynox.rql.node.LimitNode;
-import org.victorynox.rql.node.SelectNode;
 import org.victorynox.rql.parser.value.IntegerParser;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LimitNodeParserTest extends AbstractNodeParserTest<LimitNode>{
+class LimitNodeParserTest extends AbstractNodeParserTest<LimitNode> {
 	/**
 	 * Return invalid tokenStream data for cache exception test
 	 *
@@ -59,18 +58,6 @@ class LimitNodeParserTest extends AbstractNodeParserTest<LimitNode>{
 		streamBuilder.add((new TokenStream(tokenList)).iterator());
 
 		return streamBuilder.build();
-	}
-
-	@Override
-	@BeforeEach
-	protected void startUp() {
-		parser = new LimitNodeParser(new IntegerParser());
-	}
-
-	@Override
-	protected void parseResultAssert(LimitNode expectedResult, LimitNode result) {
-		assertEquals(expectedResult.getLimit(), result.getLimit());
-		assertEquals(expectedResult.getOffset(), result.getOffset());
 	}
 
 	/**
@@ -131,5 +118,17 @@ class LimitNodeParserTest extends AbstractNodeParserTest<LimitNode>{
 		streamBuilder.add(Arguments.of((new TokenStream(tokenList)).iterator(), expectedNode));
 
 		return streamBuilder.build();
+	}
+
+	@Override
+	@BeforeEach
+	protected void startUp() {
+		parser = new LimitNodeParser(new IntegerParser());
+	}
+
+	@Override
+	protected void parseResultAssert(LimitNode expectedResult, LimitNode result) {
+		assertEquals(expectedResult.getLimit(), result.getLimit());
+		assertEquals(expectedResult.getOffset(), result.getOffset());
 	}
 }

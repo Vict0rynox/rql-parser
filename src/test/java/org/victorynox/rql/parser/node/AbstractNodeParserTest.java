@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-abstract class AbstractNodeParserTest<T extends AbstractNode> extends AbstractParserTest<T> {
+public abstract class AbstractNodeParserTest<T extends AbstractNode> extends AbstractParserTest<T> {
 
 	protected NodeParser<T> parser;
 
