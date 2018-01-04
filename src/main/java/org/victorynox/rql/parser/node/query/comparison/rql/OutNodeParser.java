@@ -12,7 +12,7 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class OutNodeParser<V> extends AbstractRqlNodeParser<OutNode<V>, V> {
+public class OutNodeParser<V> extends AbstractRqlNodeParser<OutNode<V>, List<V>> {
 
 	/**
 	 * Default constructor
@@ -20,17 +20,11 @@ public class OutNodeParser<V> extends AbstractRqlNodeParser<OutNode<V>, V> {
 	 * @param filedNameParser - parser for field name
 	 * @param valueParser     - parser for value
 	 */
-	public OutNodeParser(TokenStreamParser<String> filedNameParser, TokenStreamParser<V> valueParser) {
+	public OutNodeParser(TokenStreamParser<String> filedNameParser, TokenStreamParser<List<V>> valueParser) {
 		super(filedNameParser, valueParser);
 	}
 
 	@Override
-	protected OutNode<V> createNode(String filed, V value) {
-		OutNode<V> outNode = new OutNode<>(filed);
-		outNode.addValue(value);
-		return outNode;
-	}
-
 	protected OutNode<V> createNode(String filed, List<V> value) {
 		return new OutNode<>(filed, value);
 	}

@@ -9,7 +9,7 @@ import java.util.Objects;
  *
  * @param <T> node values type
  */
-public abstract class AbstractArrayNode<T> extends AbstractComparisonNode<T> {
+public abstract class AbstractArrayNode<T> extends AbstractComparisonNode {
 
 	/**
 	 * Array values list with type T
@@ -52,7 +52,6 @@ public abstract class AbstractArrayNode<T> extends AbstractComparisonNode<T> {
 	public void setValues(List<T> values) {
 		this.values = values;
 	}
-
 
 	/**
 	 * Add value to List

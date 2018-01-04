@@ -11,7 +11,7 @@ import org.victorynox.rql.parser.node.query.AbstractComparisonNodeParser;
  * @author victorynox
  * @version 0.1
  */
-public abstract class AbstractRqlNodeParser<T extends AbstractComparisonNode<V>, V> extends AbstractComparisonNodeParser<T, V> {
+public abstract class AbstractRqlNodeParser<T extends AbstractComparisonNode, V> extends AbstractComparisonNodeParser<T, V> {
 
 	/**
 	 * Default constructor

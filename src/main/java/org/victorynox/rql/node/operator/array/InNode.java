@@ -33,6 +33,6 @@ public class InNode<T> extends AbstractArrayNode<T> {
 
 	@Override
 	public String getNodeName() {
-		return "out";
+		return "in";
 	}
 }

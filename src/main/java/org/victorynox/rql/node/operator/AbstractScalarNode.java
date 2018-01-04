@@ -10,7 +10,7 @@ import java.util.Objects;
  * @version 0.1
  * @param <T> node value type
  */
-public abstract class AbstractScalarNode<T> extends AbstractComparisonNode<T> {
+public abstract class AbstractScalarNode<T> extends AbstractComparisonNode {
 
 	/**
 	 * Node value

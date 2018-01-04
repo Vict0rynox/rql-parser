@@ -14,7 +14,7 @@ import java.util.List;
  * @author victorynox
  * @version 0.1
  */
-public class InNodeParser<V> extends AbstractRqlNodeParser<InNode<V>, V>{
+public class InNodeParser<V> extends AbstractRqlNodeParser<InNode<V>, List<V>>{
 
 	/**
 	 * Default constructor
@@ -22,17 +22,11 @@ public class InNodeParser<V> extends AbstractRqlNodeParser<InNode<V>, V>{
 	 * @param filedNameParser - parser for field name
 	 * @param valueParser     - parser for value
 	 */
-	public InNodeParser(TokenStreamParser<String> filedNameParser, TokenStreamParser<V> valueParser) {
+	public InNodeParser(TokenStreamParser<String> filedNameParser, TokenStreamParser<List<V>> valueParser) {
 		super(filedNameParser, valueParser);
 	}
 
 	@Override
-	protected InNode<V> createNode(String filed, V value) {
-		InNode<V> inNode = new InNode<>(filed);
-		inNode.addValue(value);
-		return inNode;
-	}
-
 	protected InNode<V> createNode(String filed, List<V> value) {
 		return new InNode<>(filed, value);
 	}

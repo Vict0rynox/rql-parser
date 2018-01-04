@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author victorynox
  * @version 0.1
  */
-public abstract class AbstractComparisonNode<T> extends AbstractQueryNode {
+public abstract class AbstractComparisonNode extends AbstractQueryNode {
 
 	/**
 	 * Filed name
@@ -37,7 +37,7 @@ public abstract class AbstractComparisonNode<T> extends AbstractQueryNode {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		if (!super.equals(o)) return false;
-		AbstractComparisonNode<?> that = (AbstractComparisonNode<?>) o;
+		AbstractComparisonNode that = (AbstractComparisonNode) o;
 		return Objects.equals(filed, that.filed);
 	}
 
