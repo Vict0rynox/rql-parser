@@ -14,13 +14,13 @@ class DateTimeLexerTest extends AbstractLexerTest {
 
 	static protected Stream<Arguments> getTokenAtValidCodeData() {
 		return Stream.of(
-				Arguments.of("2010-10-10T10:10:12Z", 0, "2010-10-10T10:10:12"),
-				Arguments.of("and(eq(name,2010-10-10T10:10:12Z),ne(age,string:value2))&sort(-name)", 12, "2010-10-10T10:10:12"),
-				Arguments.of("and(eq(name,value),ne(age,date:2007-10-10T00:10:12Z))&sort(-name)", 31, "2007-10-10T00:10:12"),
-				Arguments.of("and(eq(name,2010-10-10T10:10:12Z),ne(age,1910-10-10T10:10:12Z))&sort(-name)", 41, "1910-10-10T10:10:12"),
-				Arguments.of("and(eq(name,2012-12-12T12:12:12Z),ne(age,string:2011-11-10T11:11:11Z),gt(time,2010-10-10T10:10:10Z))&sort(-name)", 12, "2012-12-12T12:12:12"),
-				Arguments.of("and(eq(name,2012-12-12T12:12:12Z),ne(age,string:2011-11-10T11:11:11Z),gt(time,2010-10-10T10:10:10Z))&sort(-name)", 48, "2011-11-10T11:11:11"),
-				Arguments.of("and(eq(name,2012-12-12T12:12:12Z),ne(age,string:2011-11-10T11:11:11Z),gt(time,2010-10-10T10:10:10Z))&sort(-name)", 78, "2010-10-10T10:10:10")
+				Arguments.of("2010-10-10T10:10:12Z", 0, "2010-10-10T10:10:12Z"),
+				Arguments.of("and(eq(name,2010-10-10T10:10:12Z),ne(age,string:value2))&sort(-name)", 12, "2010-10-10T10:10:12Z"),
+				Arguments.of("and(eq(name,value),ne(age,date:2007-10-10T00:10:12Z))&sort(-name)", 31, "2007-10-10T00:10:12Z"),
+				Arguments.of("and(eq(name,2010-10-10T10:10:12Z),ne(age,1910-10-10T10:10:12Z))&sort(-name)", 41, "1910-10-10T10:10:12Z"),
+				Arguments.of("and(eq(name,2012-12-12T12:12:12Z),ne(age,string:2011-11-10T11:11:11Z),gt(time,2010-10-10T10:10:10Z))&sort(-name)", 12, "2012-12-12T12:12:12Z"),
+				Arguments.of("and(eq(name,2012-12-12T12:12:12Z),ne(age,string:2011-11-10T11:11:11Z),gt(time,2010-10-10T10:10:10Z))&sort(-name)", 48, "2011-11-10T11:11:11Z"),
+				Arguments.of("and(eq(name,2012-12-12T12:12:12Z),ne(age,string:2011-11-10T11:11:11Z),gt(time,2010-10-10T10:10:10Z))&sort(-name)", 78, "2010-10-10T10:10:10Z")
 		);
 	}
 

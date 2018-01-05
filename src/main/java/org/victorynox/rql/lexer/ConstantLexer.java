@@ -17,7 +17,7 @@ public class ConstantLexer implements Lexer {
 	@Override
 	public Optional<Token> getTokenAt(String code, int cursor) {
 		String test;
-		if (code.length() >= 7) {
+		if (code.length() >= cursor + 7) {
 			test = code.substring(cursor, cursor + 7);
 			if (test.equals("false()")) {
 				return Optional.of(new Token(TokenType.T_FALSE, test, cursor, cursor + 7));
@@ -25,7 +25,7 @@ public class ConstantLexer implements Lexer {
 				return Optional.of(new Token(TokenType.T_EMPTY, test, cursor, cursor + 7));
 			}
 		}
-		if (code.length() >= 6) {
+		if (code.length() >= cursor + 6) {
 			test = code.substring(cursor, cursor + 6);
 			if (test.equals("true()")) {
 				return Optional.of(new Token(TokenType.T_TRUE, test, cursor, cursor + 6));

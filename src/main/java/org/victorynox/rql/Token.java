@@ -1,6 +1,7 @@
 package org.victorynox.rql;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Tokenize construction in string
@@ -42,6 +43,20 @@ public class Token {
 		this.value = value;
 		this.start = start;
 		this.end = end;
+	}
+
+	/**
+	 * Initialize token
+	 * @param type token type
+	 * @param value token value
+	 * @param start position in string
+	 */
+	public Token(TokenType type, String value, int start)
+	{
+		this.type = type;
+		this.value = value;
+		this.start = start;
+		this.end = start + value.length();
 	}
 
 	@Override
@@ -108,4 +123,20 @@ public class Token {
 		return index >= 0 && index < values.length;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Token token = (Token) o;
+		return start == token.start &&
+				end == token.end &&
+				Objects.equals(value, token.value) &&
+				type == token.type;
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(value, type, start, end);
+	}
 }

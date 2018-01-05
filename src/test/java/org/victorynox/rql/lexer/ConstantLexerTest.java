@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 class ConstantLexerTest extends AbstractLexerTest {
 
+	//TODO: add test code index out of..
 
 	static protected Stream<Arguments> getTokenAtValidCodeData() {
 		return Stream.of(
