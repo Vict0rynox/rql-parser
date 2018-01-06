@@ -2,6 +2,7 @@ package org.victorynox.rql.node;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Staged map of filed and sort type.
@@ -44,13 +45,30 @@ public class SortNode extends AbstractNode {
 	 * Add filed with sort type in collection
 	 * @param filed name of filed which been sorted
 	 * @param sortType filed sort type
+	 * @return this
 	 */
-	public void addFiledSort(String filed, SortType sortType) {
+	public SortNode addFiledSort(String filed, SortType sortType) {
 		this.fieldsSort.put(filed, sortType);
+		return this;
 	}
 
 	@Override
 	public String getNodeName() {
 		return "sort";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		SortNode sortNode = (SortNode) o;
+		return Objects.equals(fieldsSort, sortNode.fieldsSort);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(super.hashCode(), fieldsSort);
 	}
 }

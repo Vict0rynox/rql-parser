@@ -2,6 +2,7 @@ package org.victorynox.rql.node;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class for storage fields which selected by query
@@ -43,14 +44,31 @@ public class SelectNode extends AbstractQueryNode {
 	/**
 	 * Add filed name to selected array list.
 	 * @param filed - selected filed name
+	 * @return this
 	 */
-	public void addFiled(String filed)
+	public SelectNode addFiled(String filed)
 	{
 		this.fields.add(filed);
+		return this;
 	}
 
 	@Override
 	public String getNodeName() {
 		return "select";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		SelectNode that = (SelectNode) o;
+		return Objects.equals(fields, that.fields);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(super.hashCode(), fields);
 	}
 }

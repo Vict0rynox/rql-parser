@@ -63,7 +63,7 @@ public class NodeParserChain<T extends AbstractNode> implements NodeParser<T> {
 				return nodeParser.parse(tokenStream);
 			}
 		}
-		throw new SyntaxErrorException("Can't parse this tokenStream");
+		throw new SyntaxErrorException("Can't parse this tokenStream -> " + tokenStream.getCurrent().getType() + " .");
 	}
 
 }

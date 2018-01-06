@@ -52,7 +52,7 @@ public class RqlParser implements TokenStreamParser<Query>{
 		QueryNodeParser<AbstractQueryNode> queryNodeParser = new QueryNodeParser<>();
 
         queryNodeParser
-                .addNodeParser(new GroupNodeParser<>(queryNodeParser))
+                .addNodeParser(new GroupNodeParser(queryNodeParser))
 
                 .addNodeParser(new AndNodeParser<>(queryNodeParser))
 				.addNodeParser(new OrNodeParser<>(queryNodeParser))
@@ -90,6 +90,6 @@ public class RqlParser implements TokenStreamParser<Query>{
 				throw new SyntaxErrorException("Find UnknownNode", e);
 			}
 		}
-		return queryBuilder.getQuery();
+		return queryBuilder.build();
 	}
 }

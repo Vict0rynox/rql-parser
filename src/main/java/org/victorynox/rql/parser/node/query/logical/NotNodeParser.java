@@ -24,10 +24,7 @@ public class NotNodeParser<V extends AbstractQueryNode> extends AbstractLogicalN
 	}
 
 	@Override
-	protected NotNode createNode(List<? extends AbstractQueryNode> queryList) throws SyntaxErrorException {
-		if(queryList.size() < 2) {
-			throw new SyntaxErrorException("NotNode can't has list with size les than tow");
-		}
+	protected NotNode createNode(List<AbstractQueryNode> queryList) {
 		return new NotNode(queryList);
 	}
 

@@ -24,7 +24,7 @@ public class AndNodeParser<V extends AbstractQueryNode> extends AbstractLogicalN
 	}
 
 	@Override
-	protected AndNode createNode(List<? extends AbstractQueryNode> queryList) throws SyntaxErrorException {
+	protected AndNode createNode(List<AbstractQueryNode> queryList) throws SyntaxErrorException {
 		if(queryList.size() < 2) {
 			throw new SyntaxErrorException("AndNode list size can't be less then tow.");
 		}

@@ -20,17 +20,17 @@ import static org.victorynox.rql.TokenType.*;
  * @author victorynox
  * @version 0.1
  */
-public class GroupNodeParser<T extends AbstractQueryNode> implements NodeParser<T> {
+public class GroupNodeParser implements NodeParser<AbstractQueryNode> {
 
 	/**
 	 * Parser another <code>AbstractQueryNode</code>
 	 */
-	protected TokenStreamParser<T> conditionParser;
+	protected TokenStreamParser<AbstractQueryNode> conditionParser;
 
 	/**
 	 * @param conditionParser condition query parser
 	 */
-	public GroupNodeParser(TokenStreamParser<T> conditionParser) {
+	public GroupNodeParser(TokenStreamParser<AbstractQueryNode> conditionParser) {
 		this.conditionParser = conditionParser;
 	}
 
@@ -40,8 +40,8 @@ public class GroupNodeParser<T extends AbstractQueryNode> implements NodeParser<
 	}
 
 	@Override
-	public T parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
-		List<T> queryList = new ArrayList<>();
+	public AbstractQueryNode parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
+		List<AbstractQueryNode> queryList = new ArrayList<>();
 		TokenType operator = null;
 
 
@@ -74,11 +74,12 @@ public class GroupNodeParser<T extends AbstractQueryNode> implements NodeParser<
 		switch (operator) {
 			case T_PIPE:
 				//noinspection unchecked
-				return (T) new OrNode(queryList);
+				return new OrNode(queryList);
 			case T_AMPERSAND:
 				//noinspection unchecked
-				return (T) new AndNode(queryList);
+				return new AndNode(queryList);
 			default:
+				//noinspection unchecked
 				return queryList.get(0);
 		}
 	}

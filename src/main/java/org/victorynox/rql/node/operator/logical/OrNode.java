@@ -23,7 +23,7 @@ public class OrNode extends AbstractLogicalNode {
 	 *
 	 * @param queries <code>List</code> of query node
 	 */
-	public OrNode(List<? extends AbstractQueryNode> queries) {
+	public OrNode(List<AbstractQueryNode> queries) {
 		super(queries);
 	}
 

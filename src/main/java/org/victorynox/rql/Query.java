@@ -2,6 +2,8 @@ package org.victorynox.rql;
 
 import org.victorynox.rql.node.*;
 
+import java.util.Objects;
+
 /**
  * @author victorynox
  * @version 0.1
@@ -96,5 +98,22 @@ public class Query extends AbstractNode
 	@Override
 	public String getNodeName() {
 		return "query";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		Query query = (Query) o;
+		return Objects.equals(selectNode, query.selectNode) &&
+				Objects.equals(queryNode, query.queryNode) &&
+				Objects.equals(sortNode, query.sortNode) &&
+				Objects.equals(limitNode, query.limitNode);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), selectNode, queryNode, sortNode, limitNode);
 	}
 }

@@ -138,7 +138,7 @@ public class ScalarParser implements TokenStreamParser<ScalarValue> {
 		} else if (token.test(new TokenType[]{TokenType.T_FLOAT})) {
 			return new ScalarValue<>(Double.parseDouble(token.getValue()));
 		}
-		throw new SyntaxErrorException("Unknown value type.");
+		throw new SyntaxErrorException("Unknown value type " + token.getType() + ".");
 	}
 
 	@Override

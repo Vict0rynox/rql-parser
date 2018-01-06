@@ -38,7 +38,7 @@ public abstract class AbstractLogicalNodeParser<T extends AbstractLogicalNode, V
 	 * @param queryList list with query
 	 * @return Node
 	 */
-	abstract protected T createNode(List<? extends AbstractQueryNode> queryList) throws SyntaxErrorException;
+	abstract protected T createNode(List<AbstractQueryNode> queryList) throws SyntaxErrorException;
 
 	/**
 	 *
@@ -56,7 +56,7 @@ public abstract class AbstractLogicalNodeParser<T extends AbstractLogicalNode, V
 
 	@Override
 	public T parse(TokenStreamIterator tokenStream) throws SyntaxErrorException {
-		List<V> queryList = new ArrayList<>();
+		List<AbstractQueryNode> queryList = new ArrayList<>();
 
 		tokenStream.expect(new TokenType[]{T_OPERATOR}, new String[]{getOperatorName()});
 		tokenStream.expect(new TokenType[]{T_OPEN_PARENTHESIS});
@@ -66,6 +66,7 @@ public abstract class AbstractLogicalNodeParser<T extends AbstractLogicalNode, V
 			if(!tokenStream.getCurrent().test(new TokenType[]{T_COMMA})) {
 				break;
 			}
+			tokenStream.next();
 		} while (true);
 
 		tokenStream.expect(new TokenType[]{T_CLOSE_PARENTHESIS});

@@ -24,7 +24,7 @@ public class OrNodeParser<V extends AbstractQueryNode> extends AbstractLogicalNo
 	}
 
 	@Override
-	protected OrNode createNode(List<? extends AbstractQueryNode> queryList) throws SyntaxErrorException {
+	protected OrNode createNode(List<AbstractQueryNode> queryList) throws SyntaxErrorException {
 		if(queryList.size() < 2) {
 			throw new SyntaxErrorException("OrNode can't has list with size les than tow");
 		}

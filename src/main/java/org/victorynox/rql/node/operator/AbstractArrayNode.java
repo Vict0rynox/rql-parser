@@ -56,10 +56,12 @@ public abstract class AbstractArrayNode<T> extends AbstractComparisonNode {
 	/**
 	 * Add value to List
 	 * @param value searched value.
+	 * @return this
 	 */
-	public void addValue(T value)
+	public AbstractArrayNode<T> addValue(T value)
 	{
 		this.values.add(value);
+		return this;
 	}
 
 	@Override

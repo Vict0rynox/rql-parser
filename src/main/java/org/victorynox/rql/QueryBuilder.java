@@ -2,6 +2,7 @@ package org.victorynox.rql;
 
 import org.victorynox.rql.exception.UnknownNodeException;
 import org.victorynox.rql.node.*;
+import org.victorynox.rql.node.operator.logical.AndNode;
 
 /**
  * @author victorynox
@@ -26,7 +27,7 @@ public class QueryBuilder {
 	 *
 	 * @return Query
 	 */
-	public Query getQuery()
+	public Query build()
 	{
 		return query;
 	}
@@ -72,6 +73,16 @@ public class QueryBuilder {
 	 * @param node query
 	 */
 	private QueryBuilder addQuery(AbstractQueryNode node) {
+		AbstractQueryNode queryNode  = query.getQueryNode();
+		if(queryNode != null) {
+			if(queryNode instanceof AndNode) {
+				node = ((AndNode)queryNode).addQueryNode(node);
+			} else {
+				node = (new AndNode())
+						.addQueryNode(queryNode)
+						.addQueryNode(node);
+			}
+		}
 		query.setQueryNode(node);
 		return this;
 	}

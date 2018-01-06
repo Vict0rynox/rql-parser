@@ -17,7 +17,7 @@ public abstract class AbstractLogicalNode extends AbstractQueryNode {
 	/**
 	 * Array with query
 	 */
-	protected List<? extends AbstractQueryNode> queries;
+	protected List<AbstractQueryNode> queries;
 
 	/**
 	 * Init <code>SelectNode</code> by empty array.
@@ -30,7 +30,7 @@ public abstract class AbstractLogicalNode extends AbstractQueryNode {
 	 * Init <code>SelectNode</code> by queries.
 	 * @param queries collection with query nodes
 	 */
-	public AbstractLogicalNode(List<? extends AbstractQueryNode> queries) {
+	public AbstractLogicalNode(List<AbstractQueryNode> queries) {
 		this.queries = queries;
 	}
 
@@ -38,15 +38,24 @@ public abstract class AbstractLogicalNode extends AbstractQueryNode {
 	 *  Default queries getter.
 	 * @return <code>ArrayList</code> with query node.
 	 */
-	public List<? extends AbstractQueryNode> getQueries() {
+	public List<AbstractQueryNode> getQueries() {
 		return queries;
+	}
+
+	/**
+	 * Add query node to list
+	 */
+	public AbstractLogicalNode addQueryNode(AbstractQueryNode node)
+	{
+		queries.add(node);
+		return this;
 	}
 
 	/**
 	 * Default queries setter
 	 * @param queries array list with query node.
 	 */
-	public void setQueries(List<? extends AbstractQueryNode> queries) {
+	public void setQueries(List<AbstractQueryNode> queries) {
 		this.queries = queries;
 	}
 
